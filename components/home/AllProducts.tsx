@@ -19,21 +19,21 @@ const AllProducts = () => {
   const { products, isLoading, error, refetch } = useProducts({ category });
 
   return (
-    <section className="container pt-16 pb-20">
+    <section className="container pt-7 md:pt-8 lg:pt-12 xl:pt-16 pb-10 md:pb-14 xl:pb-20">
       {/* Header */}
-      <div className="mb-12 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+      <div className="mb-5.5 md:mb-8 xl:mb-12 flex flex-col items-start justify-between gap-4 md:gap-6 sm:flex-row sm:items-end">
         <div>
           <SectionTitle>
             All <span className="text-primary-orange">Products</span>
           </SectionTitle>
 
-          <p className="mt-3 max-w-md text-[15px] leading-6 text-gray-500">
+          <p className="mt-1.5 md:mt-2 xl:mt-3 max-w-md text-sm md:text-[15px] md:leading-6 text-gray-500">
             Browse the current catalog — filter by category to find what
             you&apos;re looking for.
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-1.5 rounded-full border border-gray-200 bg-white p-1.5 shadow-sm">
+        <div className="flex flex-wrap gap-1.5 rounded-full border border-gray-200 bg-white p-1.5 shadow-sm shrink-0">
           {FILTERS.map(filter => {
             const isActive = filter === activeFilter;
 
@@ -42,7 +42,7 @@ const AllProducts = () => {
                 key={filter}
                 type="button"
                 onClick={() => setActiveFilter(filter)}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 cursor-pointer ${
+                className={`rounded-full px-3 md:px-4 py-1.5 md:py-2 text-sm font-medium transition-all duration-200 cursor-pointer ${
                   isActive
                     ? "bg-primary-orange text-white shadow-sm"
                     : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
@@ -92,7 +92,7 @@ const AllProducts = () => {
 
         {/* Products */}
         {!isLoading && !error && products.length > 0 && (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {products.map(product => (
               <ProductCard key={product.id} product={product} />
             ))}

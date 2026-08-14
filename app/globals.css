@@ -18,5 +18,5 @@ body {
 }
 
 .container {
-  @apply max-w-[1320px] mx-auto px-5;
+  @apply max-w-[1320px] mx-auto px-5 lg:px-10 xl:px-5;
 }

@@ -1,4 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
+import logo from "@/assets/logo.png";
 import {
   FaInstagram,
   FaTwitter,
@@ -40,17 +42,14 @@ const socialLinks: SocialLink[] = [
 export default function Footer() {
   return (
     <footer className="bg-secondary-black text-white">
-      <div className="container pt-14 pb-8">
+      <div className="container pt-7 md:pt-10 xl:pt-14 pb-5 md:pb-7 xl:pb-8">
         {/* Link columns */}
-        <div className="grid grid-cols-2 gap-10 pb-10 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-7 md:gap-10 pb-4 md:pb-7 xl:pb-10 sm:grid-cols-4">
           <div className="col-span-2 sm:col-span-1">
             <Link href="/" className="flex items-center gap-2">
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-orange text-xs font-bold">
-                JC
-              </span>
-              <span className="text-lg font-semibold tracking-wide">JCREA</span>
+              <Image src={logo} alt="logo" />
             </Link>
-            <p className="mt-4 max-w-[220px] text-sm text-white/60">
+            <p className="mt-3 md:mt-4 max-w-[220px] text-sm text-white/60">
               Product designer crafting clean, human-centered digital
               experiences.
             </p>
@@ -63,18 +62,17 @@ export default function Footer() {
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wide text-white/50">
               Follow
             </h3>
-            <ul className="flex flex-wrap gap-3 pb-3">
+            <ul className="flex flex-wrap gap-1.5 lg:gap-3 pb-3">
               {socialLinks?.map(({ label, href, icon: Icon }) => (
                 <li key={label}>
-                  <a
+                  <Link
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={label}
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white/80 transition-colors hover:bg-primary-orange hover:text-white"
+                    className="flex size-8 lg:size-10 items-center justify-center rounded-full bg-white/10 text-white/80 transition-colors hover:bg-primary-orange hover:text-white"
                   >
-                    <Icon className="h-4 w-4" />
-                  </a>
+                    <Icon className="size-3.5 lg:size-4" />
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -82,7 +80,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col-reverse items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-white/50 sm:flex-row">
+        <div className="flex flex-col-reverse items-center justify-between gap-2.5 md:gap-4 border-t border-white/10 pt-5 xl:pt-8 text-sm text-white/50 sm:flex-row">
           <p>© {new Date().getFullYear()}. All rights reserved.</p>
           <div className="flex gap-6">
             <Link href="/privacy" className="hover:text-white">
@@ -107,10 +105,10 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <h3 className="mb-4 text-sm font-semibold uppercase tracking-wide text-white/50">
+      <h3 className="mb-3 md:mb-4 text-sm font-semibold uppercase tracking-wide text-white/50">
         {title}
       </h3>
-      <ul className="space-y-3">
+      <ul className="space-y-2 md:space-y-3">
         {links.map(link => (
           <li key={link.path}>
             <Link

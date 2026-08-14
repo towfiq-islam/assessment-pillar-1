@@ -55,7 +55,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
       "
     >
       {/* Image */}
-      <div className="relative h-[220px] w-full overflow-hidden">
+      <div className="relative h-[190px] xl:h-[220px] xl:w-full overflow-hidden">
         <Image
           src={product.image}
           alt={product.name}
@@ -74,28 +74,22 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
       </div>
 
       {/* Body */}
-      <div className="flex flex-1 flex-col gap-2 p-4">
+      <div className="flex flex-1 flex-col gap-1 xl:gap-2 p-4">
         {/* Category */}
         <span className="text-xs font-medium uppercase tracking-wide text-orange-500">
           {product.category}
         </span>
 
         {/* Name */}
-        <h3 className="text-lg font-semibold text-gray-900">{product.name}</h3>
+        <h3 className="xl:text-lg font-semibold text-gray-900">
+          {product.name}
+        </h3>
 
         {/* Price & availability */}
         <div className="mt-auto flex items-center justify-between">
-          <div className="flex flex-col">
-            <span className="text-xl font-bold text-gray-900">
-              {currency.format(product.price)}
-            </span>
-
-            <span className="mt-1 flex items-center gap-1 text-xs text-gray-500">
-              <FiPackage className="h-3.5 w-3.5" />
-
-              {inStock ? "Ready to ship" : "Restocking soon"}
-            </span>
-          </div>
+          <span className="text-xl font-bold text-gray-900">
+            {currency.format(product.price)}
+          </span>
         </div>
 
         {/* Add to cart */}

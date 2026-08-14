@@ -72,7 +72,7 @@ export default function AuthPage() {
   return (
     <main className="min-h-screen flex items-center justify-center">
       <div className="container">
-        <div className="relative mx-auto max-w-md items-center justify-center rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+        <div className="my-5 relative mx-auto max-w-md items-center justify-center rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
           {/* Back */}
           <Link
             href="/"
