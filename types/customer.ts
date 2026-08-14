@@ -15,3 +15,19 @@ export interface CustomerProfile {
   memberSince: string;
   defaultAddress: string;
 }
+
+export interface Address {
+  id: string;
+  label: string;
+  recipient: string;
+  line: string;
+  isDefault: boolean;
+}
+
+export interface WishlistItem {
+  id: number;
+  name: string;
+  category: string;
+  price: number;
+  image: string;
+}
