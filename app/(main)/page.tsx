@@ -1,14 +1,14 @@
 import React from "react";
-import Hero from "./_components/Hero";
-import Services from "./_components/Services";
-import { ProductsSection } from "./_components/ProductsSection";
+import Hero from "@/components/home/Hero";
+import Services from "@/components/home/Services";
+import AllProducts from "@/components/home/AllProducts";
 
 const page = () => {
   return (
     <>
       <Hero />
       <Services />
-      <ProductsSection />
+      <AllProducts />
     </>
   );
 };
