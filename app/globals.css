@@ -2,7 +2,7 @@
 
 @theme {
   /* Colors */
-  --color-primary-orange: #FD853A;
+  --color-primary-orange: #fd853a;
   --color-secondary-black: #171717;
 
   /* Font Family */
@@ -15,4 +15,8 @@ html {
 
 body {
   @apply font-urbanist;
+}
+
+.container {
+  @apply max-w-[1340px] mx-auto px-10;
 }
