@@ -1,42 +1,33 @@
 import { cartItems } from "@/components/data/cart";
 import Link from "next/link";
-import { FiArrowLeft, FiShoppingBag } from "react-icons/fi";
-import { CartLineItem } from "./components/CartLineItem";
-import { CartOrderSummary } from "./components/CartOrderSummary";
+import { FiShoppingBag } from "react-icons/fi";
+import { CartLineItem } from "../../../components/cart/CartLineItem";
+import { CartOrderSummary } from "../../../components/cart/CartOrderSummary";
+import SectionTitle from "@/components/common/SectionTitle";
 
 export default function CartPage() {
   const isEmpty = cartItems.length === 0;
 
   return (
-    <main className="">
-      <div className="mx-auto max-w-6xl">
+    <div className="container pt-12 pb-20">
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <Link
-              href="/"
-              className="mb-3 flex items-center gap-1.5 text-sm text-gray-500 transition-colors hover:text-orange-500"
-            >
-              <FiArrowLeft className="h-3.5 w-3.5" />
-              Continue shopping
-            </Link>
+        <div className="mb-7">
+          <SectionTitle>
+            Your <span className="text-orange-500">Cart</span>
+          </SectionTitle>
 
-            <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">
-              Your <span className="text-orange-500">Cart</span>
-            </h1>
-
-            <p className="mt-2 text-sm text-gray-500">
-              Review your items before checkout.
-            </p>
-          </div>
+          <p className="mt-2 text-[15px] text-gray-500">
+            Review your items before checkout.
+          </p>
         </div>
 
         {isEmpty ? (
           <EmptyCart />
         ) : (
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 items-start">
             {/* Line items */}
-            <div className="rounded-2xl border border-gray-200 bg-white px-6 shadow-sm sm:px-7 lg:col-span-2">
+            <div className="rounded-xl border border-gray-200 bg-white shadow-sm lg:col-span-2 overflow-hidden">
               {cartItems.map(item => (
                 <CartLineItem key={item.product.id} item={item} />
               ))}
@@ -49,7 +40,7 @@ export default function CartPage() {
           </div>
         )}
       </div>
-    </main>
+    </div>
   );
 }
 
