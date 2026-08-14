@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { FiArrowLeft } from "react-icons/fi";
-import { CheckoutOrderSummary } from "./_components/CheckoutOrderSummary";
 import { ShippingForm } from "./_components/ShippingForm";
-import { PaymentForm } from "./_components/PaymentForm";
 import { cartItems } from "@/components/data/cart";
+import { CartOrderSummary } from "../cart/components/CartOrderSummary";
+import SectionTitle from "@/components/common/SectionTitle";
 
 export default function CheckoutPage() {
   return (
-    <main className="min-h-screen bg-[#f7f7f8] px-6 py-16 sm:px-10 lg:px-16">
-      <div className="mx-auto max-w-6xl">
+    <main className="container pt-10 pb-16">
+      <div className="mx-auto max-w-5xl">
         {/* Header */}
         <Link
           href="/cart"
@@ -18,27 +18,23 @@ export default function CheckoutPage() {
           Back to cart
         </Link>
 
-        <div className="mb-10">
-          <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">
-            Checkout
-          </h1>
-
-          <p className="mt-2 text-sm text-gray-500">
+        <div className="mb-7">
+          <SectionTitle>Checkout</SectionTitle>
+          <p className="mt-2 text-[15px] text-gray-500">
             Complete your information to place your order.
           </p>
         </div>
 
         {/* Layout */}
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           {/* Forms */}
           <div className="space-y-6 lg:col-span-2">
             <ShippingForm />
-            <PaymentForm />
           </div>
 
           {/* Summary */}
           <div className="lg:col-span-1">
-            <CheckoutOrderSummary items={cartItems} />
+            <CartOrderSummary items={cartItems} />
           </div>
         </div>
       </div>

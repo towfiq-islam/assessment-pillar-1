@@ -1,11 +1,10 @@
 "use client";
-
 import type { ReactNode } from "react";
 import { FiMail, FiMapPin, FiPhone, FiUser } from "react-icons/fi";
 
 export function ShippingForm() {
   return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-7">
+    <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm sm:p-5">
       {/* Header */}
       <div className="mb-6">
         <h2 className="text-lg font-semibold text-gray-900">
@@ -41,20 +40,23 @@ export function ShippingForm() {
           type="email"
         />
 
-        {/* Address */}
-        <Field
-          label="Street address"
-          icon={<FiMapPin />}
-          placeholder="123 Product Ave"
-        />
+        <label className="block">
+          <span className="mb-2 block text-sm font-medium text-gray-700">
+            Address
+          </span>
 
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
-          <Field label="City" placeholder="San Francisco" />
-          <Field label="State" placeholder="CA" />
-          <Field label="ZIP code" placeholder="94103" />
-        </div>
+          <div className="relative flex items-center gap-2 rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 transition-colors focus-within:border-orange-400 focus-within:bg-white">
+            <span className="shrink-0 text-gray-400 absolute top-3 left-3">
+              <FiMapPin />
+            </span>
 
-        <Field label="Country" placeholder="United States" />
+            <textarea
+              placeholder="Street address"
+              className="w-full bg-transparent text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none ps-5"
+              rows={4}
+            ></textarea>
+          </div>
+        </label>
 
         {/* Shipping method */}
         <div className="pt-2">

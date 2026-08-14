@@ -1,12 +1,10 @@
 "use client";
-
 import { useMemo, useState } from "react";
 import { FiAlertTriangle, FiInbox, FiRefreshCw } from "react-icons/fi";
 import { useProducts } from "@/hooks/useProducts";
 import { ProductCard } from "@/components/common/ProductCard";
-
+import SectionTitle from "@/components/common/SectionTitle";
 const FILTERS = ["All", "Laptops", "Accessories", "Monitors"] as const;
-
 type Filter = (typeof FILTERS)[number];
 
 export function ProductsSection() {
@@ -20,21 +18,20 @@ export function ProductsSection() {
   const { products, isLoading, error, refetch } = useProducts({ category });
 
   return (
-    <section className="relative overflow-hidden bg-[#f7f7f8] px-6 py-20 sm:px-10 lg:px-16">
+    <section className="container pt-16 pb-20">
       {/* Header */}
-      <div className="mx-auto mb-12 flex max-w-6xl flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+      <div className="mb-12 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
-            All <span className="text-orange-500">Products</span>
-          </h2>
+          <SectionTitle>
+            All <span className="text-primary-orange">Products</span>
+          </SectionTitle>
 
-          <p className="mt-3 max-w-md text-sm leading-6 text-gray-500">
+          <p className="mt-3 max-w-md text-[15px] leading-6 text-gray-500">
             Browse the current catalog — filter by category to find what
             you&apos;re looking for.
           </p>
         </div>
 
-        {/* Filter pills */}
         <div className="flex flex-wrap gap-1.5 rounded-full border border-gray-200 bg-white p-1.5 shadow-sm">
           {FILTERS.map(filter => {
             const isActive = filter === activeFilter;
@@ -44,9 +41,9 @@ export function ProductsSection() {
                 key={filter}
                 type="button"
                 onClick={() => setActiveFilter(filter)}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
+                className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 cursor-pointer ${
                   isActive
-                    ? "bg-orange-500 text-white shadow-sm"
+                    ? "bg-primary-orange text-white shadow-sm"
                     : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
                 }`}
               >
@@ -58,8 +55,7 @@ export function ProductsSection() {
       </div>
 
       {/* Content */}
-      <div className="mx-auto max-w-6xl">
-        {/* Loading */}
+      <div>
         {isLoading && <ProductsGridSkeleton />}
 
         {/* Error */}
@@ -95,7 +91,7 @@ export function ProductsSection() {
 
         {/* Products */}
         {!isLoading && !error && products.length > 0 && (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {products.map(product => (
               <ProductCard key={product.id} product={product} />
             ))}

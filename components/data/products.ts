@@ -55,4 +55,22 @@ export const products: Product[] = [
     image:
       "https://cdn.dummyjson.com/product-images/laptops/huawei-matebook-x-pro/1.webp",
   },
+  {
+    id: 3,
+    name: "Dell XPS 13",
+    category: "Laptops",
+    price: 1499,
+    stock: 3,
+    image:
+      "https://cdn.dummyjson.com/product-images/laptops/new-dell-xps-13-9300-laptop/1.webp",
+  },
+  {
+    id: 4,
+    name: "Apple AirPods",
+    category: "Accessories",
+    price: 129,
+    stock: 14,
+    image:
+      "https://cdn.dummyjson.com/product-images/mobile-accessories/apple-airpods/1.webp",
+  },
 ];

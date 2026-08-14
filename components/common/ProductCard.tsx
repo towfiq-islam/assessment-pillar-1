@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import {
@@ -12,7 +11,6 @@ import type { Product } from "@/types/product";
 
 interface ProductCardProps {
   product: Product;
-
   onAddToCart?: (product: Product) => void;
 }
 
@@ -45,7 +43,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
   }
 
   return (
-    <article
+    <div
       className="
         group relative flex flex-col overflow-hidden
         rounded-2xl border border-gray-200
@@ -57,12 +55,11 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
       "
     >
       {/* Image */}
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
+      <div className="relative h-[220px] w-full overflow-hidden">
         <Image
           src={product.image}
           alt={product.name}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
 
@@ -74,31 +71,10 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
         >
           {inStock ? `${product.stock} in stock` : "Sold out"}
         </span>
-
-        {/* View button */}
-        <button
-          type="button"
-          aria-label={`View ${product.name}`}
-          disabled={!inStock}
-          className="
-            absolute right-3 top-3
-            flex h-10 w-10 items-center justify-center
-            rounded-full bg-white/95
-            text-gray-700 shadow-sm
-            backdrop-blur-sm
-            transition-all duration-300
-            hover:bg-orange-500
-            hover:text-white
-            disabled:cursor-not-allowed
-            disabled:opacity-50
-          "
-        >
-          <FiArrowUpRight className="h-4 w-4" />
-        </button>
       </div>
 
       {/* Body */}
-      <div className="flex flex-1 flex-col gap-3 p-5">
+      <div className="flex flex-1 flex-col gap-2 p-4">
         {/* Category */}
         <span className="text-xs font-medium uppercase tracking-wide text-orange-500">
           {product.category}
@@ -108,7 +84,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
         <h3 className="text-lg font-semibold text-gray-900">{product.name}</h3>
 
         {/* Price & availability */}
-        <div className="mt-auto flex items-center justify-between pt-2">
+        <div className="mt-auto flex items-center justify-between">
           <div className="flex flex-col">
             <span className="text-xl font-bold text-gray-900">
               {currency.format(product.price)}
@@ -136,7 +112,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
             justAdded
               ? "bg-green-500 text-white"
               : inStock
-                ? "bg-orange-500 text-white hover:bg-orange-600 hover:shadow-md hover:shadow-orange-500/20"
+                ? "bg-orange-500 text-white hover:bg-orange-600 hover:shadow-md hover:shadow-orange-500/20 cursor-pointer"
                 : "bg-gray-100 text-gray-400"
           }`}
         >
@@ -153,6 +129,6 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
           )}
         </button>
       </div>
-    </article>
+    </div>
   );
 }
