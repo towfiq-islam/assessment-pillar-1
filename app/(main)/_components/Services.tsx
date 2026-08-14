@@ -1,54 +1,33 @@
 "use client";
-
 import { useState } from "react";
 import Image from "next/image";
 import { FiArrowUpRight } from "react-icons/fi";
 
 type Service = {
   title: string;
-  mockupSrc: string;
-  href?: string;
+  mockupImg: string;
 };
 
-type ServicesProps = {
-  eyebrow?: string;
-  heading?: string;
-  description?: string;
-  services?: Service[];
-  className?: string;
-};
-
-const DEFAULT_SERVICES: Service[] = [
+const services: Service[] = [
   {
     title: "UI/ UX Design",
-    mockupSrc: "/services/ui-ux.png",
-    href: "/service#ui-ux",
+    mockupImg: "/services/ui-ux.png",
   },
   {
     title: "Web Design",
-    mockupSrc: "/services/web-design.png",
-    href: "/service#web",
+    mockupImg: "/services/web-design.png",
   },
   {
     title: "Landing Page",
-    mockupSrc: "/services/landing-page.png",
-    href: "/service#landing",
+    mockupImg: "/services/landing-page.png",
   },
 ];
 
-export default function Services({
-  eyebrow = "My",
-  heading = "Services",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lacus nunc, posuere in justo vulputate, bibendum sodales.",
-  services = DEFAULT_SERVICES,
-  className = "",
-}: ServicesProps) {
+export default function Services() {
   const [active, setActive] = useState(0);
 
   return (
-    <section
-      className={`relative -mt-10 overflow-hidden rounded-t-[40px] bg-secondary-black pb-16 pt-16 text-white sm:pt-20 ${className}`}
-    >
+    <section className="relative -mt-10 overflow-hidden rounded-t-[40px] bg-secondary-black pb-16 pt-16 text-white sm:pt-20">
       <div className="pointer-events-none absolute -left-16 bottom-0 h-72 w-72 rounded-full bg-primary-orange/25 blur-[90px]" />
       <div className="pointer-events-none absolute -right-16 top-1/3 h-72 w-72 rounded-full bg-primary-orange/20 blur-[90px]" />
       <div className="pointer-events-none absolute left-1/2 top-10 h-24 w-24 -translate-x-1/2 rounded-full bg-primary-orange/30 blur-2xl" />
@@ -57,10 +36,11 @@ export default function Services({
         {/* Header */}
         <div className="mb-12 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <h2 className="text-3xl font-semibold sm:text-4xl">
-            {eyebrow} <span className="text-primary-orange">{heading}</span>
+            My <span className="text-primary-orange">Services</span>
           </h2>
           <p className="max-w-xs text-sm text-white/50 sm:text-right">
-            {description}
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lacus
+            nunc, posuere in justo vulputate, bibendum sodales.
           </p>
         </div>
 
@@ -97,15 +77,13 @@ function ServiceCard({ service }: { service: Service }) {
 
       <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#EDE6DD]">
         <Image
-          src={service.mockupSrc}
-          alt={`${service.title} preview`}
+          src={service?.mockupImg}
+          alt={service?.title}
           fill
           className="object-cover object-top"
-          sizes="(min-width: 640px) 33vw, 90vw"
         />
 
         <a
-          href={service.href ?? "#"}
           aria-label={`View ${service.title}`}
           className="absolute bottom-3 right-3 flex h-11 w-11 items-center justify-center rounded-full bg-secondary-black text-white shadow-lg transition-transform hover:scale-105"
         >
