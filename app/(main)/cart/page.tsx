@@ -1,8 +1,8 @@
 import { cartItems } from "@/components/data/cart";
 import Link from "next/link";
 import { FiShoppingBag } from "react-icons/fi";
-import { CartLineItem } from "./components/CartLineItem";
-import { CartOrderSummary } from "./components/CartOrderSummary";
+import { CartLineItem } from "../../../components/cart/CartLineItem";
+import { CartOrderSummary } from "../../../components/cart/CartOrderSummary";
 import SectionTitle from "@/components/common/SectionTitle";
 
 export default function CartPage() {

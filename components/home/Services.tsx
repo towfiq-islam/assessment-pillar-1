@@ -79,11 +79,10 @@ export default function Services() {
 function ServiceCard({ service }: { service: Service }) {
   return (
     <div className="relative overflow-hidden">
-    
       <div
         className={`rounded-3xl rounded-b-[40px] bg-white/4 backdrop-blur-[6px] border-2 border-white/30 card`}
       >
-        <h3 className="text-2xl text-white/90 font-semibold rounded-t-3xl p-7 pb-5 mb-14 border-b-2 border-white/30">
+        <h3 className="text-2xl text-white/90 font-semibold rounded-t-3xl p-7 pb-5 mb-16 border-b-2 border-white/30">
           {service.title}
         </h3>
 

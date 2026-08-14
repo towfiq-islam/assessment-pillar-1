@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { useMemo, useState } from "react";
 import { FiAlertTriangle, FiInbox, FiRefreshCw } from "react-icons/fi";
 import { useProducts } from "@/hooks/useProducts";
@@ -7,7 +8,7 @@ import SectionTitle from "@/components/common/SectionTitle";
 const FILTERS = ["All", "Laptops", "Accessories", "Monitors"] as const;
 type Filter = (typeof FILTERS)[number];
 
-export function ProductsSection() {
+const AllProducts = () => {
   const [activeFilter, setActiveFilter] = useState<Filter>("All");
 
   const category = useMemo(
@@ -56,7 +57,7 @@ export function ProductsSection() {
 
       {/* Content */}
       <div>
-        {isLoading && <ProductsGridSkeleton />}
+        {isLoading && "Loading..."}
 
         {/* Error */}
         {!isLoading && error && (
@@ -100,26 +101,6 @@ export function ProductsSection() {
       </div>
     </section>
   );
-}
+};
 
-function ProductsGridSkeleton() {
-  return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {Array.from({ length: 6 }).map((_, i) => (
-        <div
-          key={i}
-          className="animate-pulse overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm"
-        >
-          <div className="aspect-[4/3] w-full bg-gray-100" />
-
-          <div className="space-y-3 p-5">
-            <div className="h-3 w-16 rounded bg-gray-100" />
-            <div className="h-4 w-3/4 rounded bg-gray-100" />
-            <div className="h-5 w-1/2 rounded bg-gray-100" />
-            <div className="h-10 w-full rounded-full bg-gray-100" />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
+export default AllProducts;

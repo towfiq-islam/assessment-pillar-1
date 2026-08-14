@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { FiArrowLeft } from "react-icons/fi";
-import { ShippingForm } from "./_components/ShippingForm";
+import { ShippingForm } from "../../../components/checkout/ShippingForm";
 import { cartItems } from "@/components/data/cart";
-import { CartOrderSummary } from "../cart/components/CartOrderSummary";
+import { CartOrderSummary } from "../../../components/cart/CartOrderSummary";
 import SectionTitle from "@/components/common/SectionTitle";
 
 export default function CheckoutPage() {
