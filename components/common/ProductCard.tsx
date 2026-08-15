@@ -16,7 +16,6 @@ const currency = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0,
 });
 
-const ADDED_FEEDBACK_MS = 1600;
 
 export function ProductCard({ product, onAddToCart }: ProductCardProps) {
   const inStock = product.stock > 0;
@@ -24,15 +23,12 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
 
   useEffect(() => {
     if (!justAdded) return;
-
-    const timer = setTimeout(() => setJustAdded(false), ADDED_FEEDBACK_MS);
-
+    const timer = setTimeout(() => setJustAdded(false), 1600);
     return () => clearTimeout(timer);
   }, [justAdded]);
 
   function handleAddToCart() {
     if (!inStock) return;
-
     onAddToCart?.(product);
     setJustAdded(true);
   }
@@ -42,27 +38,20 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
       whileHover={{ y: -6 }}
       whileTap={{ scale: 0.985 }}
       transition={{ type: "spring", stiffness: 300, damping: 24 }}
-      className="
-        group relative flex h-full flex-col overflow-hidden
-        rounded-2xl border border-gray-200
-        bg-white shadow-sm
-        transition-[border-color,box-shadow] duration-300
-        hover:border-orange-200
-        hover:shadow-lg hover:shadow-gray-200/60
-      "
+      className="group relative flex h-full flex-col overflow-hidden rounded-xl md:rounded-2xl border border-gray-200 bg-white shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-orange-200 hover:shadow-lg hover:shadow-gray-200/60"
     >
       {/* Image */}
-      <div className="relative h-[190px] xl:h-[220px] xl:w-full overflow-hidden">
+      <div className="relative h-[110px] md:h-[190px] xl:h-[220px] xl:w-full overflow-hidden">
         <Image
           src={product.image}
           alt={product.name}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-contain transition-transform duration-500 group-hover:scale-105"
         />
 
         {/* Stock badge */}
         <span
-          className={`absolute left-3 top-3 rounded-full px-3 py-1 text-xs font-medium shadow-sm ${
+          className={`absolute left-1.5 md:left-3 top-1.5 md:top-3 rounded-full px-2 md:px-3 py-0.5 md:py-1 text-[10px] md:text-xs font-medium shadow-sm ${
             inStock ? "bg-white text-gray-900" : "bg-gray-900/80 text-white"
           }`}
         >
@@ -70,17 +59,17 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
         </span>
       </div>
 
-      <div className="flex flex-1 flex-col gap-1 xl:gap-2 p-4">
-        <span className="text-xs font-medium uppercase tracking-wide text-orange-500">
+      <div className="flex flex-1 flex-col gap-0.5 md:gap-1 xl:gap-2 pt-0 p-2.5 md:p-4">
+        <span className="text-[10px] md:text-xs font-medium uppercase tracking-wide text-orange-500">
           {product.category}
         </span>
 
-        <h3 className="xl:text-lg font-semibold text-gray-900">
+        <h3 className="text-sm md:text-base xl:text-lg font-semibold text-gray-900">
           {product.name}
         </h3>
 
         <div className="mt-auto flex items-center justify-between">
-          <span className="text-xl font-bold text-gray-900">
+          <span className="text-sm md:text-xl font-bold text-gray-900">
             {currency.format(product.price)}
           </span>
         </div>
@@ -94,7 +83,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
               ? `Add ${product.name} to cart`
               : `${product.name} is out of stock`
           }
-          className={`mt-1 flex w-full items-center justify-center gap-2 rounded-full py-3 text-sm font-semibold transition-colors duration-200 disabled:cursor-not-allowed ${
+          className={`mt-1 flex w-full items-center justify-center gap-2 rounded-full py-2 md:py-3 text-xs md:text-sm font-semibold transition-colors duration-200 disabled:cursor-not-allowed ${
             justAdded
               ? "bg-green-500 text-white"
               : inStock

@@ -151,14 +151,11 @@ function ShippingOption({
           defaultChecked={defaultChecked}
           className="h-4 w-4 accent-orange-500"
         />
-
         <div>
           <p className="text-sm font-medium text-gray-900">{name}</p>
-
           <p className="text-xs text-gray-500">{detail}</p>
         </div>
       </div>
-
       <span className="text-sm font-semibold text-gray-900">{price}</span>
     </label>
   );

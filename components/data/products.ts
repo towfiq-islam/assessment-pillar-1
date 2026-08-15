@@ -3,7 +3,7 @@ import type { Product } from "@/types/product";
 export const products: Product[] = [
   {
     id: 1,
-    name: "Apple MacBook Pro 14",
+    name: "Apple MacBook Pro",
     category: "Laptops",
     price: 1999,
     stock: 8,
@@ -48,7 +48,7 @@ export const products: Product[] = [
   },
   {
     id: 6,
-    name: "Huawei MateBook X Pro",
+    name: "Huawei MateBook Pro",
     category: "Laptops",
     price: 1399,
     stock: 0,
