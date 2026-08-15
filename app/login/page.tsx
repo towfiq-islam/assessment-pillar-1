@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { AnimatePresence, motion } from "framer-motion";
 import {
   FiArrowLeft,
   FiEye,
@@ -12,23 +11,6 @@ import {
   FiUser,
 } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
-import { EASE, SPRING } from "@/lib/animations";
-
-const fieldTransition = {
-  hidden: { opacity: 0, height: 0, marginTop: 0 },
-  show: {
-    opacity: 1,
-    height: "auto",
-    marginTop: 12,
-    transition: { duration: 0.3, ease: EASE },
-  },
-  exit: {
-    opacity: 0,
-    height: 0,
-    marginTop: 0,
-    transition: { duration: 0.25, ease: EASE },
-  },
-};
 
 type AuthMode = "login" | "signup";
 
@@ -89,12 +71,7 @@ export default function AuthPage() {
   return (
     <main className="min-h-screen flex items-center justify-center">
       <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 24, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.5, ease: EASE }}
-          className="my-5 relative mx-auto max-w-md items-center justify-center rounded-xl border border-gray-200 bg-white p-4 md:p-5 shadow-sm"
-        >
+        <div className="animate-fade-up my-5 relative mx-auto max-w-md items-center justify-center rounded-xl border border-gray-200 bg-white p-4 md:p-5 shadow-sm">
           <Link
             href="/"
             className="absolute left-5 top-5 mx-auto flex w-fit items-center gap-1.5 text-sm text-gray-500 transition-colors hover:text-orange-500"
@@ -131,11 +108,7 @@ export default function AuthPage() {
               }`}
             >
               {isLogin && (
-                <motion.span
-                  layoutId="auth-tab-pill"
-                  className="absolute inset-0 rounded-lg bg-white shadow-sm"
-                  transition={SPRING}
-                />
+                <span className="animate-fade-in absolute inset-0 rounded-lg bg-white shadow-sm" />
               )}
 
               <span className="relative z-10">Login</span>
@@ -149,11 +122,7 @@ export default function AuthPage() {
               }`}
             >
               {!isLogin && (
-                <motion.span
-                  layoutId="auth-tab-pill"
-                  className="absolute inset-0 rounded-lg bg-white shadow-sm"
-                  transition={SPRING}
-                />
+                <span className="animate-fade-in absolute inset-0 rounded-lg bg-white shadow-sm" />
               )}
 
               <span className="relative z-10">Sign Up</span>
@@ -162,40 +131,31 @@ export default function AuthPage() {
 
           {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-3">
-            <AnimatePresence initial={false}>
-              {!isLogin && (
-                <motion.div
-                  key="name-field"
-                  variants={fieldTransition}
-                  initial="hidden"
-                  animate="show"
-                  exit="exit"
-                  className="overflow-hidden"
-                >
-                  <label className="mb-1.5 block text-sm font-medium text-gray-700">
-                    Full name
-                  </label>
+            {!isLogin && (
+              <div key="name-field" className="animate-fade-in overflow-hidden">
+                <label className="mb-1.5 block text-sm font-medium text-gray-700">
+                  Full name
+                </label>
 
-                  <div className={wrapperClass(!!errors.name)}>
-                    <FiUser
-                      className={`shrink-0 ${
-                        errors.name ? "text-red-400" : "text-gray-400"
-                      }`}
-                    />
+                <div className={wrapperClass(!!errors.name)}>
+                  <FiUser
+                    className={`shrink-0 ${
+                      errors.name ? "text-red-400" : "text-gray-400"
+                    }`}
+                  />
 
-                    <input
-                      type="text"
-                      placeholder="John Doe"
-                      className={inputClass(!!errors.name)}
-                      {...register("name", {
-                        required: true,
-                        minLength: 2,
-                      })}
-                    />
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  <input
+                    type="text"
+                    placeholder="John Doe"
+                    className={inputClass(!!errors.name)}
+                    {...register("name", {
+                      required: true,
+                      minLength: 2,
+                    })}
+                  />
+                </div>
+              </div>
+            )}
 
             <div>
               <label className="mb-1.5 block text-sm font-medium text-gray-700">
@@ -272,78 +232,70 @@ export default function AuthPage() {
               </div>
             </div>
 
-            <AnimatePresence initial={false}>
-              {!isLogin && (
-                <motion.div
-                  key="confirm-password-field"
-                  variants={fieldTransition}
-                  initial="hidden"
-                  animate="show"
-                  exit="exit"
-                  className="overflow-hidden"
-                >
-                  <label className="mb-1.5 block text-sm font-medium text-gray-700">
-                    Confirm password
-                  </label>
+            {!isLogin && (
+              <div
+                key="confirm-password-field"
+                className="animate-fade-in overflow-hidden"
+              >
+                <label className="mb-1.5 block text-sm font-medium text-gray-700">
+                  Confirm password
+                </label>
 
-                  <div className={wrapperClass(!!errors.confirmPassword)}>
-                    <FiLock
-                      className={`shrink-0 ${
-                        errors.confirmPassword
-                          ? "text-red-400"
-                          : "text-gray-400"
-                      }`}
-                    />
+                <div className={wrapperClass(!!errors.confirmPassword)}>
+                  <FiLock
+                    className={`shrink-0 ${
+                      errors.confirmPassword
+                        ? "text-red-400"
+                        : "text-gray-400"
+                    }`}
+                  />
 
-                    <input
-                      type={showConfirmPassword ? "text" : "password"}
-                      placeholder="••••••••"
-                      className={inputClass(!!errors.confirmPassword)}
-                      {...register("confirmPassword", {
-                        required: true,
-                        validate: value => value === password,
-                      })}
-                    />
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    placeholder="••••••••"
+                    className={inputClass(!!errors.confirmPassword)}
+                    {...register("confirmPassword", {
+                      required: true,
+                      validate: value => value === password,
+                    })}
+                  />
 
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setShowConfirmPassword(!showConfirmPassword)
-                      }
-                      aria-label={
-                        showConfirmPassword ? "Hide password" : "Show password"
-                      }
-                      className="shrink-0 text-gray-400 transition-colors hover:text-gray-700"
-                    >
-                      {showConfirmPassword ? (
-                        <FiEyeOff className="h-4 w-4" />
-                      ) : (
-                        <FiEye className="h-4 w-4" />
-                      )}
-                    </button>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setShowConfirmPassword(!showConfirmPassword)
+                    }
+                    aria-label={
+                      showConfirmPassword ? "Hide password" : "Show password"
+                    }
+                    className="shrink-0 text-gray-400 transition-colors hover:text-gray-700"
+                  >
+                    {showConfirmPassword ? (
+                      <FiEyeOff className="h-4 w-4" />
+                    ) : (
+                      <FiEye className="h-4 w-4" />
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
 
-            <motion.button
+            <button
               type="submit"
-              whileTap={{ scale: 0.98 }}
-              className="flex w-full cursor-pointer items-center justify-center rounded-full bg-orange-500 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/20"
+              className="flex w-full cursor-pointer items-center justify-center rounded-full bg-orange-500 py-2.5 text-sm font-semibold text-white transition-[transform,background-color,box-shadow] duration-200 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/20 active:scale-[0.98]"
             >
               {isLogin ? "Sign in" : "Create account"}
-            </motion.button>
+            </button>
 
-            <motion.button
+            <button
               type="button"
-              whileTap={{ scale: 0.98 }}
-              className="mt-3 flex w-full cursor-pointer items-center justify-center gap-3 rounded-xl border border-gray-200 bg-white py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:border-gray-300 hover:bg-gray-50"
+              className="mt-3 flex w-full cursor-pointer items-center justify-center gap-3 rounded-xl border border-gray-200 bg-white py-2.5 text-sm font-semibold text-gray-700 transition-[transform,border-color,background-color] duration-200 hover:border-gray-300 hover:bg-gray-50 active:scale-[0.98]"
             >
               <FcGoogle className="h-5 w-5" />
               Continue with Google
-            </motion.button>
+            </button>
           </form>
-        </motion.div>
+        </div>
       </div>
     </main>
   );

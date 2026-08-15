@@ -1,9 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import logo from "@/assets/logo.png";
-import { EASE, fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
 import {
   FaInstagram,
   FaTwitter,
@@ -46,14 +44,8 @@ export default function Footer() {
   return (
     <footer className="bg-secondary-black text-white">
       <div className="container pt-7 md:pt-10 xl:pt-14 pb-5 md:pb-7 xl:pb-8">
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-          variants={staggerContainer(0.1)}
-          className="grid grid-cols-2 gap-7 md:gap-10 pb-4 md:pb-7 xl:pb-10 sm:grid-cols-4"
-        >
-          <motion.div variants={fadeUp} className="col-span-2 sm:col-span-1">
+        <div className="grid grid-cols-2 gap-7 md:gap-10 pb-4 md:pb-7 xl:pb-10 sm:grid-cols-4">
+          <div className="animate-fade-up col-span-2 sm:col-span-1">
             <Link href="/" className="flex items-center gap-2">
               <Image src={logo} alt="logo" />
             </Link>
@@ -61,45 +53,35 @@ export default function Footer() {
               Product designer crafting clean, human-centered digital
               experiences.
             </p>
-          </motion.div>
+          </div>
 
-          <FooterColumn title="Quick Links" links={quickLinks} />
-          <FooterColumn title="Services" links={serviceLinks} />
+          <FooterColumn title="Quick Links" links={quickLinks} delay={0.1} />
+          <FooterColumn title="Services" links={serviceLinks} delay={0.2} />
 
-          <motion.div variants={fadeUp}>
+          <div className="animate-fade-up" style={{ animationDelay: "0.3s" }}>
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wide text-white/50">
               Follow
             </h3>
             <ul className="flex flex-wrap gap-1.5 lg:gap-3 pb-3">
               {socialLinks?.map(({ label, href, icon: Icon }) => (
                 <li key={label}>
-                  <motion.span
-                    whileHover={{ scale: 1.15, y: -2 }}
-                    whileTap={{ scale: 0.9 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                    className="inline-block"
+                  <Link
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex size-8 lg:size-10 items-center justify-center rounded-full bg-white/10 text-white/80 transition-[transform,background-color] duration-200 hover:scale-110 hover:-translate-y-0.5 hover:bg-primary-orange hover:text-white active:scale-90"
                   >
-                    <Link
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex size-8 lg:size-10 items-center justify-center rounded-full bg-white/10 text-white/80 transition-colors hover:bg-primary-orange hover:text-white"
-                    >
-                      <Icon className="size-3.5 lg:size-4" />
-                    </Link>
-                  </motion.span>
+                    <Icon className="size-3.5 lg:size-4" />
+                  </Link>
                 </li>
               ))}
             </ul>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, ease: EASE, delay: 0.15 }}
-          className="flex flex-col-reverse items-center justify-between gap-2.5 md:gap-4 border-t border-white/10 pt-5 xl:pt-8 text-sm text-white/50 sm:flex-row"
+        <div
+          className="animate-fade-up flex flex-col-reverse items-center justify-between gap-2.5 md:gap-4 border-t border-white/10 pt-5 xl:pt-8 text-sm text-white/50 sm:flex-row"
+          style={{ animationDelay: "0.15s" }}
         >
           <p>© {new Date().getFullYear()}. All rights reserved.</p>
           <div className="flex gap-6">
@@ -110,7 +92,7 @@ export default function Footer() {
               Terms of Service
             </Link>
           </div>
-        </motion.div>
+        </div>
       </div>
     </footer>
   );
@@ -119,12 +101,17 @@ export default function Footer() {
 function FooterColumn({
   title,
   links,
+  delay = 0,
 }: {
   title: string;
   links: FooterLink[];
+  delay?: number;
 }) {
   return (
-    <motion.div variants={fadeUp}>
+    <div
+      className="animate-fade-up"
+      style={{ animationDelay: `${delay}s` }}
+    >
       <h3 className="mb-3 md:mb-4 text-sm font-semibold uppercase tracking-wide text-white/50">
         {title}
       </h3>
@@ -140,6 +127,6 @@ function FooterColumn({
           </li>
         ))}
       </ul>
-    </motion.div>
+    </div>
   );
 }

@@ -1,12 +1,10 @@
 "use client";
 import Image, { StaticImageData } from "next/image";
-import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import serviceBg from "@/assets/Services.png";
-import { EASE, staggerContainer } from "@/lib/animations";
 import uiMockup from "@/assets/contain.png";
 import webMockup from "@/assets/web_design.png";
 import landingMockup from "@/assets/landing_page.png";
@@ -41,13 +39,7 @@ export default function Services() {
 
       <div className="container relative">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: EASE }}
-          className="mb-7 md:mb-10 xl:mb-14 flex flex-col justify-between gap-2 md:gap-6 sm:flex-row md:items-center"
-        >
+        <div className="animate-fade-up mb-7 md:mb-10 xl:mb-14 flex flex-col justify-between gap-2 md:gap-6 sm:flex-row md:items-center">
           <h2 className="text-2xl lg:text-3xl xl:text-4xl font-semibold">
             My <span className="text-primary-orange">Services</span>
           </h2>
@@ -55,16 +47,10 @@ export default function Services() {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lacus
             nunc, posuere in justo vulputate, bibendum sodales.
           </p>
-        </motion.div>
+        </div>
 
         {/* Cards */}
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={staggerContainer(0.1)}
-          className="overflow-hidden"
-        >
+        <div className="overflow-hidden">
           <Swiper
             modules={[Pagination]}
             spaceBetween={24}
@@ -90,7 +76,7 @@ export default function Services() {
               </SwiperSlide>
             ))}
           </Swiper>
-        </motion.div>
+        </div>
 
         <div className="services-pagination mt-4 md:mt-6 lg:mt-8 xl:mt-10 flex flex-wrap justify-center gap-2 [&_.service-dot]:h-2 [&_.service-dot]:w-2 [&_.service-dot]:rounded-full [&_.service-dot]:bg-white/20 [&_.service-dot]:cursor-pointer [&_.service-dot]:transition-all [&_.service-dot]:duration-300 [&_.service-dot]:ease-out  [&_.service-dot-active]:w-6 [&_.service-dot-active]:bg-primary-orange" />
       </div>
