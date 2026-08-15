@@ -78,12 +78,7 @@ export default function Navbar() {
   return (
     <nav className="sticky top-3 xl:top-3.5 z-50">
       {/* ===== Desktop Version ===== */}
-      <motion.div
-        initial={{ opacity: 0, y: -16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: EASE }}
-        className="hidden lg:max-w-[94%] xl:max-w-7xl lg:mx-auto lg:p-2.5 lg:flex items-center justify-between rounded-full bg-secondary-black text-white gap-5 xl:gap-20"
-      >
+      <div className="nav-fade hidden lg:max-w-[94%] xl:max-w-7xl lg:mx-auto lg:p-2.5 lg:flex items-center justify-between rounded-full bg-secondary-black text-white gap-5 xl:gap-20">
         {/* Left links */}
         <ul className="w-full flex justify-between items-center flex-1">
           {NavLinks?.slice(0, 3)?.map(link => (
@@ -132,16 +127,11 @@ export default function Navbar() {
             <FiShoppingBag size={18} />
           </MotionLink>
         </div>
-      </motion.div>
+      </div>
 
       {/* ===== Mobile Version ===== */}
       <div className="lg:hidden relative max-w-[94%] mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: -12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: EASE }}
-          className="flex items-center justify-between rounded-full bg-secondary-black text-white px-3 py-2"
-        >
+        <div className="nav-fade flex items-center justify-between rounded-full bg-secondary-black text-white px-3 py-2">
           <Link href="/" className="flex items-center gap-2.5">
             <Image
               src={logo}
@@ -170,7 +160,7 @@ export default function Navbar() {
               </motion.span>
             </AnimatePresence>
           </button>
-        </motion.div>
+        </div>
 
         <div className="absolute inset-x-0 top-full z-40 mt-2">
           <AnimatePresence>

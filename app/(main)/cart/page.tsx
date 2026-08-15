@@ -12,7 +12,7 @@ export default function CartPage() {
   const isEmpty = cartItems.length === 0;
 
   return (
-    <div className="container pt-12 pb-20">
+    <div className="container pt-7 md:pt-10 xl:pt-12 pb-10 md:pb-16 xl:pb-20">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <motion.div
@@ -20,7 +20,7 @@ export default function CartPage() {
           whileInView="show"
           viewport={viewportOnce}
           variants={staggerContainer(0.1)}
-          className="mb-7"
+          className="mb-5 md:mb-7"
         >
           <motion.div variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } } }}>
             <SectionTitle>
@@ -30,7 +30,7 @@ export default function CartPage() {
 
           <motion.p
             variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } } }}
-            className="mt-2 text-[15px] text-gray-500"
+            className="mt-1 xl:mt-2 text-[15px] text-gray-500"
           >
             Review your items before checkout.
           </motion.p>
