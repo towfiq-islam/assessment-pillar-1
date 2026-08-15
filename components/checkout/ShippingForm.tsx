@@ -16,7 +16,7 @@ export function ShippingForm() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={viewportOnce}
       transition={{ duration: 0.5, ease: EASE }}
-      className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm sm:p-5"
+      className="rounded-xl border border-gray-200 bg-white p-4 md:p-6 shadow-sm"
     >
       {/* Header */}
       <div className="mb-6">
@@ -37,7 +37,7 @@ export function ShippingForm() {
         className="space-y-5"
       >
         {/* Contact */}
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-3 md:gap-5 sm:grid-cols-2">
           <motion.div variants={fadeUp}>
             <Field
               label="Full name"
@@ -123,7 +123,7 @@ function Field({ label, placeholder, icon, type = "text" }: FieldProps) {
         {label}
       </span>
 
-      <div className="flex items-center gap-2 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 transition-colors focus-within:border-orange-400 focus-within:bg-white">
+      <div className="flex items-center gap-2 rounded-xl border border-gray-200 bg-gray-50 px-3 md:px-4 py-2 md:py-3 transition-colors focus-within:border-orange-400 focus-within:bg-white">
         {icon && <span className="shrink-0 text-gray-400">{icon}</span>}
 
         <input

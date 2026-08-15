@@ -1,51 +1,10 @@
 "use client";
-import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  FiGrid,
-  FiHeart,
-  FiLogOut,
-  FiMapPin,
-  FiPackage,
-  FiSettings,
-} from "react-icons/fi";
+import { FiLogOut } from "react-icons/fi";
 import type { CustomerProfile } from "@/types/customer";
-
-interface SidebarLink {
-  label: string;
-  path: string;
-  icon: ReactNode;
-}
-
-const SIDEBAR_LINKS: SidebarLink[] = [
-  {
-    label: "Overview",
-    path: "/dashboard",
-    icon: <FiGrid className="h-4 w-4" />,
-  },
-  {
-    label: "Orders",
-    path: "/dashboard/orders",
-    icon: <FiPackage className="h-4 w-4" />,
-  },
-  {
-    label: "Wishlist",
-    path: "/dashboard/wishlist",
-    icon: <FiHeart className="h-4 w-4" />,
-  },
-  {
-    label: "Addresses",
-    path: "/dashboard/addresses",
-    icon: <FiMapPin className="h-4 w-4" />,
-  },
-  {
-    label: "Settings",
-    path: "/dashboard/settings",
-    icon: <FiSettings className="h-4 w-4" />,
-  },
-];
+import { SIDEBAR_LINKS } from "./dashboardLinks";
 
 interface DashboardSidebarProps {
   customer: CustomerProfile;
