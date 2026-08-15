@@ -3,7 +3,7 @@ import { CartItem } from "@/types/cart";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FiMinus, FiPlus, FiTrash2 } from "react-icons/fi";
-import { EASE } from "@/components/common/animations";
+import { EASE } from "@/lib/animations";
 
 interface CartLineItemProps {
   item: CartItem;

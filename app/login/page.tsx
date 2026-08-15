@@ -12,7 +12,7 @@ import {
   FiUser,
 } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
-import { EASE, SPRING } from "@/components/common/animations";
+import { EASE, SPRING } from "@/lib/animations";
 
 const fieldTransition = {
   hidden: { opacity: 0, height: 0, marginTop: 0 },
@@ -289,7 +289,9 @@ export default function AuthPage() {
                   <div className={wrapperClass(!!errors.confirmPassword)}>
                     <FiLock
                       className={`shrink-0 ${
-                        errors.confirmPassword ? "text-red-400" : "text-gray-400"
+                        errors.confirmPassword
+                          ? "text-red-400"
+                          : "text-gray-400"
                       }`}
                     />
 
@@ -305,7 +307,9 @@ export default function AuthPage() {
 
                     <button
                       type="button"
-                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
                       aria-label={
                         showConfirmPassword ? "Hide password" : "Show password"
                       }

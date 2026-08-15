@@ -24,11 +24,7 @@ export const sidebarLinks: SidebarLink[] = [
     path: "/dashboard/orders",
     icon: <FiPackage className="h-4 w-4" />,
   },
-  {
-    label: "Wishlist",
-    path: "/dashboard/wishlist",
-    icon: <FiHeart className="h-4 w-4" />,
-  },
+ 
   {
     label: "Addresses",
     path: "/dashboard/addresses",

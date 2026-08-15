@@ -6,7 +6,7 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import serviceBg from "@/assets/Services.png";
-import { EASE, staggerContainer } from "@/components/common/animations";
+import { EASE, staggerContainer } from "@/lib/animations";
 import uiMockup from "@/assets/contain.png";
 import webMockup from "@/assets/web_design.png";
 import landingMockup from "@/assets/landing_page.png";
@@ -92,7 +92,7 @@ export default function Services() {
           </Swiper>
         </motion.div>
 
-        <div className="services-pagination mt-4  md:mt-6 lg:mt-8 xl:mt-10 flex flex-wrap justify-center gap-2 [&_.service-dot]:h-2 [&_.service-dot]:w-2 [&_.service-dot]:rounded-full [&_.service-dot]:bg-white/20 [&_.service-dot]:cursor-pointer [&_.service-dot]:transition-all [&_.service-dot]:duration-300 [&_.service-dot]:ease-out hover:[&_.service-dot]:bg-white/40 [&_.service-dot-active]:w-6 [&_.service-dot-active]:bg-primary-orange" />
+        <div className="services-pagination mt-4 md:mt-6 lg:mt-8 xl:mt-10 flex flex-wrap justify-center gap-2 [&_.service-dot]:h-2 [&_.service-dot]:w-2 [&_.service-dot]:rounded-full [&_.service-dot]:bg-white/20 [&_.service-dot]:cursor-pointer [&_.service-dot]:transition-all [&_.service-dot]:duration-300 [&_.service-dot]:ease-out  [&_.service-dot-active]:w-6 [&_.service-dot-active]:bg-primary-orange" />
       </div>
     </section>
   );

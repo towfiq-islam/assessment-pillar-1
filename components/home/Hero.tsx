@@ -20,7 +20,7 @@ export default function Hero() {
           <Image
             src={upperVector}
             alt="upper-vector"
-            className="object-contain absolute -right-6 -top-3.5 md:-top-5.5 w-6 md:w-fit"
+            className="object-contain absolute -right-6 -top-3.5 md:-top-5 w-6 md:w-7"
           />
         </div>
 

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import logo from "@/assets/logo.png";
 import { FiShoppingBag, FiUser, FiMenu, FiX, FiLogOut } from "react-icons/fi";
-import { EASE, staggerContainer } from "@/components/common/animations";
+import { EASE, staggerContainer } from "@/lib/animations";
 import { sidebarLinks } from "@/components/dashboard/dashboardLinks";
 import type { CustomerProfile } from "@/types/customer";
 
@@ -48,7 +48,7 @@ function NavItem({ link, isActive }: { link: NavLink; isActive: boolean }) {
   );
 }
 
-// Mobile 
+// Mobile
 function MobileNavItem({
   link,
   isActive,
@@ -104,10 +104,7 @@ export default function Navbar({ customer }: NavbarProps) {
     if (!isMenuOpen && !isDrawerOpen) return;
 
     function handlePointerDown(event: MouseEvent | TouchEvent) {
-      if (
-        navRef.current &&
-        !navRef.current.contains(event.target as Node)
-      ) {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
         closeMenus();
       }
     }
@@ -297,13 +294,13 @@ export default function Navbar({ customer }: NavbarProps) {
                 />
 
                 <motion.div
-                  className="absolute inset-y-0 left-0 flex w-72 max-w-[85vw] flex-col bg-white shadow-2xl"
+                  className="absolute inset-y-0 left-0 flex w-64 md:w-68 max-w-[85vw] flex-col bg-white shadow-2xl"
                   initial={{ x: "-100%" }}
                   animate={{ x: 0 }}
                   exit={{ x: "-100%" }}
                   transition={{ type: "spring", stiffness: 320, damping: 32 }}
                 >
-                  <div className="flex items-center justify-between border-b border-gray-200 px-5 py-4">
+                  <div className="flex items-center justify-between border-b border-gray-200 p-5">
                     <div className="min-w-0">
                       <p className="truncate text-sm font-semibold text-gray-900">
                         {customer?.name ?? "My account"}
@@ -352,7 +349,7 @@ export default function Navbar({ customer }: NavbarProps) {
 
                     <button
                       type="button"
-                      className="mt-5 flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium text-gray-500 transition-colors duration-200 hover:bg-gray-100 hover:text-gray-900"
+                      className="mt-3 flex items-center gap-3 rounded-full px-4 py-3 text-[15px] font-semibold cursor-pointer transition-colors duration-200 text-red-500"
                     >
                       <FiLogOut className="h-4 w-4" />
                       Log out

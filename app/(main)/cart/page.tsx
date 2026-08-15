@@ -6,7 +6,7 @@ import { FiShoppingBag } from "react-icons/fi";
 import { CartLineItem } from "../../../components/cart/CartLineItem";
 import { CartOrderSummary } from "../../../components/cart/CartOrderSummary";
 import SectionTitle from "@/components/common/SectionTitle";
-import { EASE, staggerContainer, viewportOnce } from "@/components/common/animations";
+import { EASE, staggerContainer, viewportOnce } from "@/lib/animations";
 
 export default function CartPage() {
   const isEmpty = cartItems.length === 0;
@@ -21,14 +21,30 @@ export default function CartPage() {
           variants={staggerContainer(0.1)}
           className="mb-5 md:mb-7"
         >
-          <motion.div variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } } }}>
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.5, ease: EASE },
+              },
+            }}
+          >
             <SectionTitle>
               Your <span className="text-orange-500">Cart</span>
             </SectionTitle>
           </motion.div>
 
           <motion.p
-            variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } } }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.5, ease: EASE },
+              },
+            }}
             className="mt-1 xl:mt-2 text-[15px] text-gray-500"
           >
             Review your items before checkout.
@@ -41,11 +57,7 @@ export default function CartPage() {
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 items-start">
             <div className="rounded-xl border border-gray-200 bg-white shadow-sm lg:col-span-2 overflow-hidden">
               {cartItems.map((item, index) => (
-                <CartLineItem
-                  key={item.product.id}
-                  item={item}
-                  index={index}
-                />
+                <CartLineItem key={item.product.id} item={item} index={index} />
               ))}
             </div>
 

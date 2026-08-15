@@ -2,12 +2,7 @@
 import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { FiMail, FiMapPin, FiPhone, FiUser } from "react-icons/fi";
-import {
-  EASE,
-  fadeUp,
-  staggerContainer,
-  viewportOnce,
-} from "@/components/common/animations";
+import { EASE, fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
 
 export function ShippingForm() {
   return (

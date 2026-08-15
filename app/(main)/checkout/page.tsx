@@ -6,7 +6,7 @@ import { ShippingForm } from "../../../components/checkout/ShippingForm";
 import { cartItems } from "@/components/data/cart";
 import { CartOrderSummary } from "../../../components/cart/CartOrderSummary";
 import SectionTitle from "@/components/common/SectionTitle";
-import { EASE, staggerContainer, viewportOnce } from "@/components/common/animations";
+import { EASE, staggerContainer, viewportOnce } from "@/lib/animations";
 
 export default function CheckoutPage() {
   return (
@@ -20,7 +20,14 @@ export default function CheckoutPage() {
           variants={staggerContainer(0.1)}
         >
           <motion.div
-            variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASE } } }}
+            variants={{
+              hidden: { opacity: 0, y: 16 },
+              show: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.45, ease: EASE },
+              },
+            }}
           >
             <Link
               href="/cart"
@@ -32,7 +39,14 @@ export default function CheckoutPage() {
           </motion.div>
 
           <motion.div
-            variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASE } } }}
+            variants={{
+              hidden: { opacity: 0, y: 16 },
+              show: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.45, ease: EASE },
+              },
+            }}
             className="mb-5 md:mb-7"
           >
             <SectionTitle>Checkout</SectionTitle>

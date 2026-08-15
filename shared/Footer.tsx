@@ -3,12 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import logo from "@/assets/logo.png";
-import {
-  EASE,
-  fadeUp,
-  staggerContainer,
-  viewportOnce,
-} from "@/components/common/animations";
+import { EASE, fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
 import {
   FaInstagram,
   FaTwitter,

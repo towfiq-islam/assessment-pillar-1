@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FiArrowLeft, FiSearch } from "react-icons/fi";
-import { EASE } from "@/components/common/animations";
+import { EASE } from "@/lib/animations";
 
 const NotFound = () => {
   return (

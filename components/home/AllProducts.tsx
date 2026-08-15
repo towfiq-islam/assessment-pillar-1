@@ -3,12 +3,7 @@ import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ProductCard } from "@/components/common/ProductCard";
 import SectionTitle from "@/components/common/SectionTitle";
-import {
-  EASE,
-  fadeUp,
-  staggerContainer,
-  viewportOnce,
-} from "@/components/common/animations";
+import { EASE, fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
 import { products } from "@/components/data/products";
 const FILTERS = ["All", "Laptops", "Accessories", "Monitors"] as const;
 type Filter = (typeof FILTERS)[number];
