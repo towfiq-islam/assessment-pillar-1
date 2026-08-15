@@ -13,7 +13,7 @@ export interface SidebarLink {
   icon: ReactNode;
 }
 
-export const SIDEBAR_LINKS: SidebarLink[] = [
+export const sidebarLinks: SidebarLink[] = [
   {
     label: "Overview",
     path: "/dashboard",
@@ -24,11 +24,7 @@ export const SIDEBAR_LINKS: SidebarLink[] = [
     path: "/dashboard/orders",
     icon: <FiPackage className="h-4 w-4" />,
   },
-  {
-    label: "Wishlist",
-    path: "/dashboard/wishlist",
-    icon: <FiHeart className="h-4 w-4" />,
-  },
+ 
   {
     label: "Addresses",
     path: "/dashboard/addresses",

@@ -1,28 +1,20 @@
 "use client";
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FiAlertTriangle, FiInbox, FiRefreshCw } from "react-icons/fi";
-import { useProducts } from "@/hooks/useProducts";
 import { ProductCard } from "@/components/common/ProductCard";
 import SectionTitle from "@/components/common/SectionTitle";
-import {
-  EASE,
-  fadeUp,
-  staggerContainer,
-  viewportOnce,
-} from "@/components/common/animations";
+import { EASE, fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
+import { products } from "@/components/data/products";
 const FILTERS = ["All", "Laptops", "Accessories", "Monitors"] as const;
 type Filter = (typeof FILTERS)[number];
 
 const AllProducts = () => {
   const [activeFilter, setActiveFilter] = useState<Filter>("All");
 
-  const category = useMemo(
-    () => (activeFilter === "All" ? undefined : activeFilter),
-    [activeFilter],
-  );
-
-  const { products, isLoading, error, refetch } = useProducts({ category });
+  const filteredProducts = useMemo(() => {
+    if (activeFilter === "All") return products;
+    return products.filter(product => product.category === activeFilter);
+  }, [activeFilter]);
 
   return (
     <section className="container pt-7 md:pt-8 lg:pt-12 xl:pt-16 pb-10 md:pb-14 xl:pb-20">
@@ -45,7 +37,7 @@ const AllProducts = () => {
           </p>
         </motion.div>
 
-        {/* Filter pills */}
+        {/* Filter */}
         <motion.div
           variants={fadeUp}
           className="relative flex flex-wrap gap-1.5 rounded-full border border-gray-200 bg-white p-1.5 shadow-sm shrink-0"
@@ -83,68 +75,29 @@ const AllProducts = () => {
         </motion.div>
       </motion.div>
 
-      {/* Content */}
-      <div>
-        {isLoading && "Loading..."}
-
-        {/* Error */}
-        {!isLoading && error && (
-          <div className="flex flex-col items-center gap-4 rounded-2xl border border-gray-200 bg-white py-16 text-center shadow-sm">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-50">
-              <FiAlertTriangle className="h-6 w-6 text-orange-500" />
-            </div>
-
-            <p className="text-gray-600">{error}</p>
-
-            <button
-              type="button"
-              onClick={refetch}
-              className="flex items-center gap-2 rounded-full bg-orange-500 px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-orange-600 hover:shadow-md hover:shadow-orange-500/20"
+      <motion.div
+        layout
+        className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+      >
+        <AnimatePresence mode="popLayout">
+          {filteredProducts.map((product, index) => (
+            <motion.div
+              key={product.id}
+              layout
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{
+                duration: 0.35,
+                ease: EASE,
+                delay: Math.min(index * 0.05, 0.4),
+              }}
             >
-              <FiRefreshCw className="h-4 w-4" />
-              Try again
-            </button>
-          </div>
-        )}
-
-        {/* Empty */}
-        {!isLoading && !error && products.length === 0 && (
-          <div className="flex flex-col items-center gap-3 rounded-2xl border border-gray-200 bg-white py-16 text-center shadow-sm">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-50">
-              <FiInbox className="h-6 w-6 text-gray-400" />
-            </div>
-
-            <p className="text-gray-500">No products in this category yet.</p>
-          </div>
-        )}
-
-        {/* Products */}
-        {!isLoading && !error && products.length > 0 && (
-          <motion.div
-            layout
-            className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-          >
-            <AnimatePresence mode="popLayout">
-              {products.map((product, index) => (
-                <motion.div
-                  key={product.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{
-                    duration: 0.35,
-                    ease: EASE,
-                    delay: Math.min(index * 0.05, 0.4),
-                  }}
-                >
-                  <ProductCard product={product} />
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
-        )}
-      </div>
+              <ProductCard product={product} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
     </section>
   );
 };

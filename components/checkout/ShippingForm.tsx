@@ -2,12 +2,7 @@
 import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { FiMail, FiMapPin, FiPhone, FiUser } from "react-icons/fi";
-import {
-  EASE,
-  fadeUp,
-  staggerContainer,
-  viewportOnce,
-} from "@/components/common/animations";
+import { EASE, fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
 
 export function ShippingForm() {
   return (
@@ -36,7 +31,6 @@ export function ShippingForm() {
         variants={staggerContainer(0.08, 0.1)}
         className="space-y-5"
       >
-        {/* Contact */}
         <div className="grid grid-cols-1 gap-3 md:gap-5 sm:grid-cols-2">
           <motion.div variants={fadeUp}>
             <Field
@@ -83,7 +77,6 @@ export function ShippingForm() {
           </div>
         </motion.label>
 
-        {/* Shipping method */}
         <motion.div variants={fadeUp} className="pt-2">
           <span className="mb-3 block text-sm font-medium text-gray-700">
             Shipping method

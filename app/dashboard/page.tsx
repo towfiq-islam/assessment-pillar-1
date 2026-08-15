@@ -1,8 +1,9 @@
 "use client";
+import SectionTitle from "@/components/common/SectionTitle";
+import { RecentOrders } from "@/components/dashboard/RecentOrders";
+import { StatCard } from "@/components/dashboard/StatCard";
 import { customer, customerOrders } from "@/components/data/customer";
 import { FiClock, FiDollarSign, FiPackage } from "react-icons/fi";
-import { StatCard } from "../../components/dashboard/StatCard";
-import { RecentOrders } from "../../components/dashboard/RecentOrders";
 
 export default function DashboardOverviewPage() {
   const totalOrders = customerOrders.length;
@@ -23,22 +24,20 @@ export default function DashboardOverviewPage() {
 
   return (
     <div>
-      {/* Welcome header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">
+      <div className="mb-5 md:mb-6">
+        <SectionTitle>
           Welcome back,{" "}
           <span className="text-primary-orange">
             {customer.name.split(" ")[0]}
           </span>
-        </h1>
+        </SectionTitle>
 
-        <p className="mt-2 text-gray-500">
+        <p className="mt-0.5 md:mt-1 xl:mt-2 text-gray-500 text-sm md:text-base">
           Here&apos;s what&apos;s happening with your account.
         </p>
       </div>
 
-      {/* Stat cards */}
-      <div className="mb-6 grid grid-cols-1 gap-5 sm:grid-cols-3">
+      <div className="mb-5 xl:mb-6 grid grid-cols-1 gap-3.5 md:gap-5 sm:grid-cols-3">
         <StatCard
           label="Total orders"
           value={String(totalOrders)}
