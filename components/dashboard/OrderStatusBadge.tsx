@@ -1,3 +1,4 @@
+"use client";
 import type { ReactNode } from "react";
 import { FiCheckCircle, FiClock, FiTruck, FiXCircle } from "react-icons/fi";
 import type { OrderStatus } from "@/types/customer";

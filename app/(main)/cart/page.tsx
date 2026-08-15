@@ -1,9 +1,12 @@
+"use client";
 import { cartItems } from "@/components/data/cart";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { FiShoppingBag } from "react-icons/fi";
 import { CartLineItem } from "../../../components/cart/CartLineItem";
 import { CartOrderSummary } from "../../../components/cart/CartOrderSummary";
 import SectionTitle from "@/components/common/SectionTitle";
+import { EASE, staggerContainer, viewportOnce } from "@/components/common/animations";
 
 export default function CartPage() {
   const isEmpty = cartItems.length === 0;
@@ -12,15 +15,26 @@ export default function CartPage() {
     <div className="container pt-12 pb-20">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="mb-7">
-          <SectionTitle>
-            Your <span className="text-orange-500">Cart</span>
-          </SectionTitle>
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer(0.1)}
+          className="mb-7"
+        >
+          <motion.div variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } } }}>
+            <SectionTitle>
+              Your <span className="text-orange-500">Cart</span>
+            </SectionTitle>
+          </motion.div>
 
-          <p className="mt-2 text-[15px] text-gray-500">
+          <motion.p
+            variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } } }}
+            className="mt-2 text-[15px] text-gray-500"
+          >
             Review your items before checkout.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {isEmpty ? (
           <EmptyCart />
@@ -28,8 +42,12 @@ export default function CartPage() {
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 items-start">
             {/* Line items */}
             <div className="rounded-xl border border-gray-200 bg-white shadow-sm lg:col-span-2 overflow-hidden">
-              {cartItems.map(item => (
-                <CartLineItem key={item.product.id} item={item} />
+              {cartItems.map((item, index) => (
+                <CartLineItem
+                  key={item.product.id}
+                  item={item}
+                  index={index}
+                />
               ))}
             </div>
 
@@ -46,7 +64,13 @@ export default function CartPage() {
 
 function EmptyCart() {
   return (
-    <div className="flex flex-col items-center gap-4 rounded-2xl border border-gray-200 bg-white py-24 text-center shadow-sm">
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={viewportOnce}
+      transition={{ duration: 0.5, ease: EASE }}
+      className="flex flex-col items-center gap-4 rounded-2xl border border-gray-200 bg-white py-24 text-center shadow-sm"
+    >
       <div className="flex h-16 w-16 items-center justify-center rounded-full bg-orange-50">
         <FiShoppingBag className="h-8 w-8 text-orange-500" />
       </div>
@@ -67,6 +91,6 @@ function EmptyCart() {
       >
         Browse products
       </Link>
-    </div>
+    </motion.div>
   );
 }
