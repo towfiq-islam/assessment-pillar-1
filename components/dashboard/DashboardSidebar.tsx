@@ -87,14 +87,16 @@ export function DashboardSidebar({ customer }: DashboardSidebarProps) {
               <li key={link.path}>
                 <Link
                   href={link.path}
-                  className={`flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium transition-colors duration-200 ${
+                  className={`relative flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium transition-colors duration-200 ${
                     isActive
                       ? "bg-primary-orange text-black"
                       : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                   }`}
                 >
-                  {link.icon}
-                  {link.label}
+                  <span className="relative z-10 flex items-center gap-3">
+                    {link.icon}
+                    {link.label}
+                  </span>
                 </Link>
               </li>
             );

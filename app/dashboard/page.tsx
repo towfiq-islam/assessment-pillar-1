@@ -1,3 +1,4 @@
+"use client";
 import { customer, customerOrders } from "@/components/data/customer";
 import { FiClock, FiDollarSign, FiPackage } from "react-icons/fi";
 import { StatCard } from "../../components/dashboard/StatCard";

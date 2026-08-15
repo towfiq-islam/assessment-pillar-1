@@ -1,9 +1,13 @@
+"use client";
 import { CartItem } from "@/types/cart";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { FiMinus, FiPlus, FiTrash2 } from "react-icons/fi";
+import { EASE } from "@/components/common/animations";
 
 interface CartLineItemProps {
   item: CartItem;
+  index?: number;
 }
 
 const currency = new Intl.NumberFormat("en-US", {
@@ -12,11 +16,17 @@ const currency = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0,
 });
 
-export function CartLineItem({ item }: CartLineItemProps) {
+export function CartLineItem({ item, index = 0 }: CartLineItemProps) {
   const { product, quantity } = item;
 
   return (
-    <div className="flex gap-4 border-b border-gray-200 p-3 hover:bg-gray-50 last:border-b-0 sm:gap-6">
+    <motion.div
+      initial={{ opacity: 0, x: -24 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.45, ease: EASE, delay: index * 0.08 }}
+      className="flex gap-4 border-b border-gray-200 p-3 hover:bg-gray-50 last:border-b-0 sm:gap-6"
+    >
       {/* Product Image */}
       <figure className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-gray-100 sm:h-28 sm:w-28">
         <Image
@@ -46,40 +56,43 @@ export function CartLineItem({ item }: CartLineItemProps) {
           </div>
 
           {/* Remove */}
-          <button
+          <motion.button
             type="button"
             aria-label={`Remove ${product.name} from cart`}
-            className="shrink-0 rounded-full p-2 text-gray-400 transition-all hover:bg-orange-50 hover:text-orange-500 cursor-pointer"
+            whileTap={{ scale: 0.85 }}
+            className="shrink-0 rounded-full p-2 text-gray-400 transition-colors hover:bg-orange-50 hover:text-orange-500 cursor-pointer"
           >
             <FiTrash2 className="h-4 w-4" />
-          </button>
+          </motion.button>
         </div>
 
         <div className="flex items-center justify-between">
           {/* Quantity stepper */}
           <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-2 py-1">
-            <button
+            <motion.button
               type="button"
               aria-label="Decrease quantity"
+              whileTap={{ scale: 0.8 }}
               className="flex h-6 w-6 items-center justify-center rounded-full text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-900 cursor-pointer"
             >
               <FiMinus className="h-3 w-3" />
-            </button>
+            </motion.button>
 
             <span className="w-4 text-center text-sm font-semibold text-gray-900">
               {quantity}
             </span>
 
-            <button
+            <motion.button
               type="button"
               aria-label="Increase quantity"
+              whileTap={{ scale: 0.8 }}
               className="flex h-6 w-6 items-center justify-center rounded-full text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-900 cursor-pointer"
             >
               <FiPlus className="h-3 w-3" />
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

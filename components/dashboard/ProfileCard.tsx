@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { FiEdit2, FiMail, FiMapPin } from "react-icons/fi";
 import type { CustomerProfile } from "@/types/customer";

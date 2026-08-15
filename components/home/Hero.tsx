@@ -1,15 +1,27 @@
+"use client";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { FaQuoteLeft, FaStar } from "react-icons/fa";
 import heroBg from "@/assets/hero.png";
 import upperVector from "@/assets/upper_vector.png";
 import lowerVector from "@/assets/lower_vector.png";
+import {
+  fadeUp,
+  scaleIn,
+  staggerContainer,
+} from "@/components/common/animations";
 
 export default function Hero() {
   return (
-    <section className="pb-4 pt-14 md:pt-16 xl:pt-18 text-secondary-black">
+    <motion.section
+      initial="hidden"
+      animate="show"
+      variants={staggerContainer(0.14, 0.1)}
+      className="pb-4 pt-14 md:pt-16 xl:pt-18 text-secondary-black"
+    >
       <div className="container relative">
         {/* Greeting badge */}
-        <div className="relative mx-auto mb-2 md:mb-3 w-fit">
+        <motion.div variants={fadeUp} className="relative mx-auto mb-2 md:mb-3 w-fit">
           <span className="flex items-center gap-2 rounded-full border border-secondary-black/90 text-gray-800 px-5 md:px-6 xl:px-8 py-1.5 md:py-2 text-[15px] md:text-base xl:text-lg font-semibold">
             Hello
           </span>
@@ -19,10 +31,10 @@ export default function Hero() {
             alt="upper-vector"
             className="object-contain absolute -right-6 -top-3.5 md:-top-5.5 w-6 md:w-fit"
           />
-        </div>
+        </motion.div>
 
         {/* Title */}
-        <div className="relative w-fit mx-auto text-center">
+        <motion.div variants={fadeUp} className="relative w-fit mx-auto text-center">
           <Image
             src={lowerVector}
             alt="upper-vector"
@@ -34,9 +46,12 @@ export default function Hero() {
             <br />
             Project Designer
           </h1>
-        </div>
+        </motion.div>
 
-        <div className="relative mt-14 lg:-mt-16 xl:-mt-22 grid items-center grid-cols-2 lg:grid-cols-[1fr_1.4fr_1fr]">
+        <motion.div
+          variants={fadeUp}
+          className="relative mt-14 lg:-mt-16 xl:-mt-22 grid items-center grid-cols-2 lg:grid-cols-[1fr_1.4fr_1fr]"
+        >
           <div className="xl:w-[280px]">
             <FaQuoteLeft className="mb-2 md:mb-3 lg:mb-4 size-4 md:size-6 text-[#344054] mx-0" />
             <p className="leading-relaxed text-[#344054] text-[13px] md:text-[15px] lg:text-base">
@@ -45,9 +60,12 @@ export default function Hero() {
             </p>
           </div>
 
-          <figure className="hidden lg:block relative -ml-12 w-[600px] xl:w-[800px] h-[450px] xl:h-[550px]">
+          <motion.figure
+            variants={scaleIn}
+            className="hidden lg:block relative -ml-12 w-[600px] xl:w-[800px] h-[450px] xl:h-[550px]"
+          >
             <Image src={heroBg} alt="hero" priority className="w-full h-full" />
-          </figure>
+          </motion.figure>
 
           <div className="mx-0 text-right">
             <div className="mb-1.5 md:mb-2 flex gap-1 text-primary-orange justify-end">
@@ -62,12 +80,15 @@ export default function Hero() {
               Experience
             </p>
           </div>
-        </div>
+        </motion.div>
 
-        <figure className="-mt-14 md:-mt-5 lg:hidden block mx-auto relative w-full md:w-[600px] md:h-[450px]">
+        <motion.figure
+          variants={scaleIn}
+          className="-mt-14 md:-mt-5 lg:hidden block mx-auto relative w-full md:w-[600px] md:h-[450px]"
+        >
           <Image src={heroBg} alt="hero" priority className="w-full h-full" />
-        </figure>
+        </motion.figure>
       </div>
-    </section>
+    </motion.section>
   );
 }
