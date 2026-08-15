@@ -1,6 +1,14 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import logo from "@/assets/logo.png";
+import {
+  EASE,
+  fadeUp,
+  staggerContainer,
+  viewportOnce,
+} from "@/components/common/animations";
 import {
   FaInstagram,
   FaTwitter,
@@ -44,8 +52,14 @@ export default function Footer() {
     <footer className="bg-secondary-black text-white">
       <div className="container pt-7 md:pt-10 xl:pt-14 pb-5 md:pb-7 xl:pb-8">
         {/* Link columns */}
-        <div className="grid grid-cols-2 gap-7 md:gap-10 pb-4 md:pb-7 xl:pb-10 sm:grid-cols-4">
-          <div className="col-span-2 sm:col-span-1">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer(0.1)}
+          className="grid grid-cols-2 gap-7 md:gap-10 pb-4 md:pb-7 xl:pb-10 sm:grid-cols-4"
+        >
+          <motion.div variants={fadeUp} className="col-span-2 sm:col-span-1">
             <Link href="/" className="flex items-center gap-2">
               <Image src={logo} alt="logo" />
             </Link>
@@ -53,34 +67,47 @@ export default function Footer() {
               Product designer crafting clean, human-centered digital
               experiences.
             </p>
-          </div>
+          </motion.div>
 
           <FooterColumn title="Quick Links" links={quickLinks} />
           <FooterColumn title="Services" links={serviceLinks} />
 
-          <div>
+          <motion.div variants={fadeUp}>
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wide text-white/50">
               Follow
             </h3>
             <ul className="flex flex-wrap gap-1.5 lg:gap-3 pb-3">
               {socialLinks?.map(({ label, href, icon: Icon }) => (
                 <li key={label}>
-                  <Link
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex size-8 lg:size-10 items-center justify-center rounded-full bg-white/10 text-white/80 transition-colors hover:bg-primary-orange hover:text-white"
+                  <motion.span
+                    whileHover={{ scale: 1.15, y: -2 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                    className="inline-block"
                   >
-                    <Icon className="size-3.5 lg:size-4" />
-                  </Link>
+                    <Link
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex size-8 lg:size-10 items-center justify-center rounded-full bg-white/10 text-white/80 transition-colors hover:bg-primary-orange hover:text-white"
+                    >
+                      <Icon className="size-3.5 lg:size-4" />
+                    </Link>
+                  </motion.span>
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col-reverse items-center justify-between gap-2.5 md:gap-4 border-t border-white/10 pt-5 xl:pt-8 text-sm text-white/50 sm:flex-row">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: EASE, delay: 0.15 }}
+          className="flex flex-col-reverse items-center justify-between gap-2.5 md:gap-4 border-t border-white/10 pt-5 xl:pt-8 text-sm text-white/50 sm:flex-row"
+        >
           <p>© {new Date().getFullYear()}. All rights reserved.</p>
           <div className="flex gap-6">
             <Link href="/privacy" className="hover:text-white">
@@ -90,7 +117,7 @@ export default function Footer() {
               Terms of Service
             </Link>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );
@@ -104,7 +131,7 @@ function FooterColumn({
   links: FooterLink[];
 }) {
   return (
-    <div>
+    <motion.div variants={fadeUp}>
       <h3 className="mb-3 md:mb-4 text-sm font-semibold uppercase tracking-wide text-white/50">
         {title}
       </h3>
@@ -113,13 +140,13 @@ function FooterColumn({
           <li key={link.path}>
             <Link
               href={link.path}
-              className="text-sm text-white/70 hover:text-white"
+              className="text-sm text-white/70 transition-colors hover:text-white"
             >
               {link.label}
             </Link>
           </li>
         ))}
       </ul>
-    </div>
+    </motion.div>
   );
 }

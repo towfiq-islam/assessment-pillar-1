@@ -1,6 +1,9 @@
+"use client";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { FiEdit2, FiMail, FiMapPin } from "react-icons/fi";
 import type { CustomerProfile } from "@/types/customer";
+import { EASE, viewportOnce } from "@/components/common/animations";
 
 interface ProfileCardProps {
   customer: CustomerProfile;
@@ -8,7 +11,13 @@ interface ProfileCardProps {
 
 export function ProfileCard({ customer }: ProfileCardProps) {
   return (
-    <div className="rounded-3xl bg-secondary-black p-6">
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={viewportOnce}
+      transition={{ duration: 0.5, ease: EASE }}
+      className="rounded-3xl bg-secondary-black p-6"
+    >
       <div className="flex items-center gap-4">
         <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full bg-white/10">
           <Image
@@ -40,13 +49,14 @@ export function ProfileCard({ customer }: ProfileCardProps) {
         </div>
       </div>
 
-      <button
+      <motion.button
         type="button"
+        whileTap={{ scale: 0.97 }}
         className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-white/5 py-3 text-sm font-medium text-white transition-colors hover:bg-white/10"
       >
         <FiEdit2 className="h-3.5 w-3.5" />
         Edit profile
-      </button>
-    </div>
+      </motion.button>
+    </motion.div>
   );
 }

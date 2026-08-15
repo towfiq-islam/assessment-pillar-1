@@ -1,3 +1,4 @@
+import MotionProvider from "@/provider/MotionProvider";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
@@ -24,7 +25,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${urbanist.variable} antialiased`}>
-      <body>{children}</body>
+      <body>
+        <MotionProvider>{children}</MotionProvider>
+      </body>
     </html>
   );
 }
