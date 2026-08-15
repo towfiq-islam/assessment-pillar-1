@@ -42,14 +42,11 @@ export default function CheckoutPage() {
           </motion.div>
         </motion.div>
 
-        {/* Layout */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-          {/* Forms */}
           <div className="space-y-4 md:space-y-6 lg:col-span-2">
             <ShippingForm />
           </div>
 
-          {/* Summary */}
           <div className="lg:col-span-1">
             <CartOrderSummary items={cartItems} />
           </div>

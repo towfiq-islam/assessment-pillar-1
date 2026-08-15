@@ -55,7 +55,6 @@ export function CartLineItem({ item, index = 0 }: CartLineItemProps) {
             </p>
           </div>
 
-          {/* Remove */}
           <motion.button
             type="button"
             aria-label={`Remove ${product.name} from cart`}
@@ -67,7 +66,6 @@ export function CartLineItem({ item, index = 0 }: CartLineItemProps) {
         </div>
 
         <div className="flex items-center justify-between">
-          {/* Quantity stepper */}
           <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-2 py-1">
             <motion.button
               type="button"

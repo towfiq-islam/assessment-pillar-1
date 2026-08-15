@@ -95,15 +95,13 @@ export default function AuthPage() {
           transition={{ duration: 0.5, ease: EASE }}
           className="my-5 relative mx-auto max-w-md items-center justify-center rounded-xl border border-gray-200 bg-white p-4 md:p-5 shadow-sm"
         >
-          {/* Back */}
           <Link
             href="/"
             className="absolute left-5 top-5 mx-auto flex w-fit items-center gap-1.5 text-sm text-gray-500 transition-colors hover:text-orange-500"
           >
-            <FiArrowLeft className="size-4" />
+            <FiArrowLeft className="size-4.5" />
           </Link>
 
-          {/* Header */}
           <div className="text-center">
             <h1 className="text-2xl font-bold text-gray-900">
               {isLogin ? (
@@ -124,7 +122,6 @@ export default function AuthPage() {
             </p>
           </div>
 
-          {/* Tabs */}
           <div className="mt-5 relative grid grid-cols-2 rounded-xl bg-gray-100 p-1">
             <button
               type="button"
@@ -165,7 +162,6 @@ export default function AuthPage() {
 
           {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-3">
-            {/* Name */}
             <AnimatePresence initial={false}>
               {!isLogin && (
                 <motion.div
@@ -201,7 +197,6 @@ export default function AuthPage() {
               )}
             </AnimatePresence>
 
-            {/* Email */}
             <div>
               <label className="mb-1.5 block text-sm font-medium text-gray-700">
                 Email address
@@ -229,7 +224,6 @@ export default function AuthPage() {
               </div>
             </div>
 
-            {/* Password */}
             <div>
               <div className="mb-1.5 flex items-center justify-between">
                 <label className="text-sm font-medium text-gray-700">
@@ -238,7 +232,7 @@ export default function AuthPage() {
 
                 {isLogin && (
                   <Link
-                    href="/forgot-password"
+                    href=""
                     className="text-xs font-medium text-orange-500 hover:text-orange-600"
                   >
                     Forgot password?
@@ -278,7 +272,6 @@ export default function AuthPage() {
               </div>
             </div>
 
-            {/* Confirm password */}
             <AnimatePresence initial={false}>
               {!isLogin && (
                 <motion.div
@@ -329,7 +322,6 @@ export default function AuthPage() {
               )}
             </AnimatePresence>
 
-            {/* Submit */}
             <motion.button
               type="submit"
               whileTap={{ scale: 0.98 }}
@@ -338,7 +330,6 @@ export default function AuthPage() {
               {isLogin ? "Sign in" : "Create account"}
             </motion.button>
 
-            {/* Google */}
             <motion.button
               type="button"
               whileTap={{ scale: 0.98 }}

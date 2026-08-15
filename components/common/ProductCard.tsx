@@ -20,7 +20,6 @@ const ADDED_FEEDBACK_MS = 1600;
 
 export function ProductCard({ product, onAddToCart }: ProductCardProps) {
   const inStock = product.stock > 0;
-
   const [justAdded, setJustAdded] = useState(false);
 
   useEffect(() => {
@@ -71,26 +70,21 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
         </span>
       </div>
 
-      {/* Body */}
       <div className="flex flex-1 flex-col gap-1 xl:gap-2 p-4">
-        {/* Category */}
         <span className="text-xs font-medium uppercase tracking-wide text-orange-500">
           {product.category}
         </span>
 
-        {/* Name */}
         <h3 className="xl:text-lg font-semibold text-gray-900">
           {product.name}
         </h3>
 
-        {/* Price & availability */}
         <div className="mt-auto flex items-center justify-between">
           <span className="text-xl font-bold text-gray-900">
             {currency.format(product.price)}
           </span>
         </div>
 
-        {/* Add to cart */}
         <button
           type="button"
           onClick={handleAddToCart}

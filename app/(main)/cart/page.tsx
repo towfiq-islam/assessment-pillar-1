@@ -14,7 +14,6 @@ export default function CartPage() {
   return (
     <div className="container pt-7 md:pt-10 xl:pt-12 pb-10 md:pb-16 xl:pb-20">
       <div className="max-w-5xl mx-auto">
-        {/* Header */}
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -40,7 +39,6 @@ export default function CartPage() {
           <EmptyCart />
         ) : (
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 items-start">
-            {/* Line items */}
             <div className="rounded-xl border border-gray-200 bg-white shadow-sm lg:col-span-2 overflow-hidden">
               {cartItems.map((item, index) => (
                 <CartLineItem

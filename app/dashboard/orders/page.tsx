@@ -1,5 +1,5 @@
+import { RecentOrders } from "@/components/dashboard/RecentOrders";
 import { customerOrders } from "@/components/data/customer";
-import { RecentOrders } from "../../../components/dashboard/RecentOrders";
 
 export default function OrdersPage() {
   return (

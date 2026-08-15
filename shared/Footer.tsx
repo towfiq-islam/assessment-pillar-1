@@ -51,7 +51,6 @@ export default function Footer() {
   return (
     <footer className="bg-secondary-black text-white">
       <div className="container pt-7 md:pt-10 xl:pt-14 pb-5 md:pb-7 xl:pb-8">
-        {/* Link columns */}
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -100,7 +99,6 @@ export default function Footer() {
           </motion.div>
         </motion.div>
 
-        {/* Bottom bar */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -9,7 +9,6 @@ export default function Hero() {
   return (
     <section className="pb-4 pt-14 md:pt-16 xl:pt-18 text-secondary-black">
       <div className="container relative">
-        {/* Greeting badge */}
         <div
           className="hero-rise relative mx-auto mb-2 md:mb-3 w-fit"
           style={{ animationDelay: "0.1s" }}

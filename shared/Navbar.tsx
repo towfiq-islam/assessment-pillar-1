@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import logo from "@/assets/logo.png";
 import { FiShoppingBag, FiUser, FiMenu, FiX, FiLogOut } from "react-icons/fi";
 import { EASE, staggerContainer } from "@/components/common/animations";
-import { SIDEBAR_LINKS } from "@/components/dashboard/dashboardLinks";
+import { sidebarLinks } from "@/components/dashboard/dashboardLinks";
 import type { CustomerProfile } from "@/types/customer";
 
 const MotionLink = motion(Link);
@@ -80,7 +80,6 @@ interface NavbarProps {
 export default function Navbar({ customer }: NavbarProps) {
   const pathname = usePathname();
   const isDashboard = pathname.startsWith("/dashboard");
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
@@ -130,9 +129,8 @@ export default function Navbar({ customer }: NavbarProps) {
 
   return (
     <nav ref={navRef} className="sticky top-3 xl:top-3.5 z-50">
-      {/* ===== Desktop Version ===== */}
+      {/*  Desktop */}
       <div className="nav-fade hidden lg:max-w-[94%] xl:max-w-7xl lg:mx-auto lg:p-2.5 lg:flex items-center justify-between rounded-full bg-secondary-black text-white gap-5 xl:gap-20">
-        {/* Left links */}
         <ul className="w-full flex justify-between items-center flex-1">
           {NavLinks?.slice(0, 3)?.map(link => (
             <NavItem
@@ -143,12 +141,10 @@ export default function Navbar({ customer }: NavbarProps) {
           ))}
         </ul>
 
-        {/* Center logo */}
         <Link href="/" className="shrink-0">
           <Image src={logo} alt="logo" className="object-contain" />
         </Link>
 
-        {/* Right links */}
         <ul className="w-full flex justify-between items-center flex-1">
           {NavLinks?.slice(3)?.map(link => (
             <NavItem
@@ -159,7 +155,6 @@ export default function Navbar({ customer }: NavbarProps) {
           ))}
         </ul>
 
-        {/* Actions */}
         <div className="ml-3 xl:ml-5 flex shrink-0 items-center gap-2">
           <Link
             href="/login"
@@ -182,7 +177,7 @@ export default function Navbar({ customer }: NavbarProps) {
         </div>
       </div>
 
-      {/* ===== Mobile Version ===== */}
+      {/* Mobile */}
       <div className="lg:hidden relative max-w-[94%] mx-auto">
         <div className="nav-fade flex items-center justify-between rounded-full bg-secondary-black text-white px-3 py-2">
           <Link href="/" className="flex items-center gap-2.5">
@@ -225,7 +220,6 @@ export default function Navbar({ customer }: NavbarProps) {
           </button>
         </div>
 
-        {/* ===== Landing: site links dropdown ===== */}
         {!isDashboard && (
           <div className="absolute inset-x-0 top-full z-40 mt-2">
             <AnimatePresence>
@@ -283,7 +277,6 @@ export default function Navbar({ customer }: NavbarProps) {
           </div>
         )}
 
-        {/* ===== Dashboard: slide-in drawer ===== */}
         {isDashboard && (
           <AnimatePresence>
             {isDrawerOpen && (
@@ -299,11 +292,10 @@ export default function Navbar({ customer }: NavbarProps) {
               >
                 {/* Backdrop */}
                 <div
-                  className="absolute inset-0 bg-black/40"
+                  className="absolute inset-0 bg-black/40 backdrop-blur-xs"
                   onClick={closeMenus}
                 />
 
-                {/* Panel */}
                 <motion.div
                   className="absolute inset-y-0 left-0 flex w-72 max-w-[85vw] flex-col bg-white shadow-2xl"
                   initial={{ x: "-100%" }}
@@ -334,7 +326,7 @@ export default function Navbar({ customer }: NavbarProps) {
                   <div className="flex-1 overflow-y-auto p-5">
                     <nav>
                       <ul className="flex flex-col gap-1.5">
-                        {SIDEBAR_LINKS.map(link => {
+                        {sidebarLinks?.map(link => {
                           const isActive = pathname === link.path;
 
                           return (

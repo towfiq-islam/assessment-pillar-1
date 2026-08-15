@@ -13,7 +13,7 @@ export interface SidebarLink {
   icon: ReactNode;
 }
 
-export const SIDEBAR_LINKS: SidebarLink[] = [
+export const sidebarLinks: SidebarLink[] = [
   {
     label: "Overview",
     path: "/dashboard",

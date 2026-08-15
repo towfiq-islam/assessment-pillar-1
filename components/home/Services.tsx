@@ -5,14 +5,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-
 import serviceBg from "@/assets/Services.png";
 import { EASE, staggerContainer } from "@/components/common/animations";
 import uiMockup from "@/assets/contain.png";
 import webMockup from "@/assets/web_design.png";
 import landingMockup from "@/assets/landing_page.png";
+import { ServiceCard } from "../common/ServiceCard";
 
-type Service = {
+export type Service = {
   title: string;
   mockupImg: StaticImageData;
 };
@@ -27,15 +27,6 @@ const services: Service[] = [
   { title: "Product Design", mockupImg: uiMockup },
   { title: "Illustration", mockupImg: webMockup },
 ];
-
-const lightFadeUp = {
-  hidden: { opacity: 0, y: 14 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: EASE },
-  },
-};
 
 export default function Services() {
   return (
@@ -104,33 +95,5 @@ export default function Services() {
         <div className="services-pagination mt-4  md:mt-6 lg:mt-8 xl:mt-10 flex flex-wrap justify-center gap-2 [&_.service-dot]:h-2 [&_.service-dot]:w-2 [&_.service-dot]:rounded-full [&_.service-dot]:bg-white/20 [&_.service-dot]:cursor-pointer [&_.service-dot]:transition-all [&_.service-dot]:duration-300 [&_.service-dot]:ease-out hover:[&_.service-dot]:bg-white/40 [&_.service-dot-active]:w-6 [&_.service-dot-active]:bg-primary-orange" />
       </div>
     </section>
-  );
-}
-
-function ServiceCard({ service, index }: { service: Service; index: number }) {
-  return (
-    <motion.div
-      variants={lightFadeUp}
-      initial="hidden"
-      animate="show"
-      transition={{ delay: index * 0.06 }}
-      whileHover={{ y: -8 }}
-      className="relative h-full"
-    >
-      <div className="h-full rounded-2xl md:rounded-3xl rounded-b-[40px] bg-white/4 backdrop-blur-[6px] border-2 border-white/30 card">
-        <h3 className="text-lg lg:text-xl xl:text-2xl text-white/90 font-semibold rounded-t-3xl p-4 xl:p-7 xl:pb-5 mb-7 lg:mb-10 xl:mb-16 border-b-2 border-white/30">
-          {service.title}
-        </h3>
-
-        <figure className="relative w-full h-[280px] xl:h-[351px] overflow-hidden rounded-2xl">
-          <Image
-            src={service.mockupImg}
-            alt={service.title}
-            fill
-            className="object-cover"
-          />
-        </figure>
-      </div>
-    </motion.div>
   );
 }

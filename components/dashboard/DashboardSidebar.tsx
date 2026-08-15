@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FiLogOut } from "react-icons/fi";
 import type { CustomerProfile } from "@/types/customer";
-import { SIDEBAR_LINKS } from "./dashboardLinks";
+import { sidebarLinks } from "./dashboardLinks";
 
 interface DashboardSidebarProps {
   customer: CustomerProfile;
@@ -36,34 +36,31 @@ export function DashboardSidebar({ customer }: DashboardSidebarProps) {
         </div>
       </div>
 
-      {/* Navigation */}
-      <nav>
-        <ul className="flex flex-col gap-1.5">
-          {SIDEBAR_LINKS.map(link => {
-            const isActive = pathname === link.path;
+      <ul className="flex flex-col gap-1.5">
+        {sidebarLinks?.map(link => {
+          const isActive = pathname === link.path;
 
-            return (
-              <li key={link.path}>
-                <Link
-                  href={link.path}
-                  className={`relative flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium transition-colors duration-200 ${
-                    isActive
-                      ? "bg-primary-orange text-black"
-                      : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-                  }`}
-                >
-                  <span className="relative z-10 flex items-center gap-3">
-                    {link.icon}
-                    {link.label}
-                  </span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
+          return (
+            <li key={link.path}>
+              <Link
+                href={link.path}
+                className={`relative flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium transition-colors duration-200 ${
+                  isActive
+                    ? "bg-primary-orange text-black"
+                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                }`}
+              >
+                <span className="relative z-10 flex items-center gap-3">
+                  {link.icon}
+                  {link.label}
+                </span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
 
-      {/* Logout */}
+      {/* Logout btn */}
       <button
         type="button"
         className="flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium text-gray-500 transition-colors duration-200 hover:bg-gray-100 hover:text-gray-900"
@@ -74,4 +71,3 @@ export function DashboardSidebar({ customer }: DashboardSidebarProps) {
     </aside>
   );
 }
- 

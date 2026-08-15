@@ -14,7 +14,6 @@ export default function SettingsPage() {
       </div>
 
       <div className="space-y-6">
-        {/* Personal details */}
         <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-7">
           <h2 className="mb-5 text-lg font-semibold text-gray-900">
             Personal details
@@ -43,7 +42,6 @@ export default function SettingsPage() {
           </button>
         </div>
 
-        {/* Password */}
         <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-7">
           <h2 className="mb-5 text-lg font-semibold text-gray-900">
             Change password
