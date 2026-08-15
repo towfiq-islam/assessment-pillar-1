@@ -93,7 +93,7 @@ export default function AuthPage() {
           initial={{ opacity: 0, y: 24, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.5, ease: EASE }}
-          className="my-5 relative mx-auto max-w-md items-center justify-center rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
+          className="my-5 relative mx-auto max-w-md items-center justify-center rounded-xl border border-gray-200 bg-white p-4 md:p-5 shadow-sm"
         >
           {/* Back */}
           <Link

@@ -72,7 +72,7 @@ export default function Services() {
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
           variants={staggerContainer(0.1)}
-          className="min-h-[420px] md:min-h-[440px] xl:min-h-[480px] overflow-hidden"
+          className="overflow-hidden"
         >
           <Swiper
             modules={[Pagination]}
@@ -101,7 +101,7 @@ export default function Services() {
           </Swiper>
         </motion.div>
 
-        <div className="services-pagination mt-6 md:mt-8 xl:mt-10 flex flex-wrap justify-center gap-2 [&_.service-dot]:h-2 [&_.service-dot]:w-2 [&_.service-dot]:rounded-full [&_.service-dot]:bg-white/20 [&_.service-dot]:cursor-pointer [&_.service-dot]:transition-all [&_.service-dot]:duration-300 [&_.service-dot]:ease-out hover:[&_.service-dot]:bg-white/40 [&_.service-dot-active]:w-6 [&_.service-dot-active]:bg-primary-orange" />
+        <div className="services-pagination mt-4  md:mt-6 lg:mt-8 xl:mt-10 flex flex-wrap justify-center gap-2 [&_.service-dot]:h-2 [&_.service-dot]:w-2 [&_.service-dot]:rounded-full [&_.service-dot]:bg-white/20 [&_.service-dot]:cursor-pointer [&_.service-dot]:transition-all [&_.service-dot]:duration-300 [&_.service-dot]:ease-out hover:[&_.service-dot]:bg-white/40 [&_.service-dot-active]:w-6 [&_.service-dot-active]:bg-primary-orange" />
       </div>
     </section>
   );
@@ -122,13 +122,12 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
           {service.title}
         </h3>
 
-        <figure className="relative w-full h-[230px] lg:h-[280px] xl:h-[351px] overflow-hidden rounded-2xl">
+        <figure className="relative w-full h-[280px] xl:h-[351px] overflow-hidden rounded-2xl">
           <Image
             src={service.mockupImg}
             alt={service.title}
             fill
             className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </figure>
       </div>

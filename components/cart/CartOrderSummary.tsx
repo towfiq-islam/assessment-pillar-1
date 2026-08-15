@@ -35,7 +35,7 @@ export function CartOrderSummary({ items }: CartOrderSummaryProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.5, ease: EASE }}
-      className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
+      className="rounded-xl border border-gray-200 bg-white p-4 md:p-5 shadow-sm"
     >
       {/* Header */}
       <h2 className="text-xl font-semibold text-gray-900">Order Summary</h2>
