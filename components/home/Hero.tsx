@@ -7,7 +7,7 @@ import lowerVector from "@/assets/lower_vector.png";
 
 export default function Hero() {
   return (
-    <section className="pb-4 pt-14 md:pt-16 xl:pt-18 text-secondary-black">
+    <section className="pb-4 pt-13 md:pt-16 xl:pt-18 text-secondary-black">
       <div className="container relative">
         <div
           className="hero-rise relative mx-auto mb-2 md:mb-3 w-fit"
@@ -43,7 +43,7 @@ export default function Hero() {
         </div>
 
         <div
-          className="hero-rise relative mt-14 lg:-mt-16 xl:-mt-22 grid items-center grid-cols-2 lg:grid-cols-[1fr_1.4fr_1fr]"
+          className="hero-rise relative mt-12 md:mt-14 lg:-mt-16 xl:-mt-22 grid items-center grid-cols-2 lg:grid-cols-[1fr_1.4fr_1fr]"
           style={{ animationDelay: "0.3s" }}
         >
           <div className="xl:w-[280px]">

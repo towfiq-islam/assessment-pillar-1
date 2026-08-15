@@ -3,10 +3,10 @@ import { cartItems } from "@/components/data/cart";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FiShoppingBag } from "react-icons/fi";
-import { CartLineItem } from "../../../components/cart/CartLineItem";
-import { CartOrderSummary } from "../../../components/cart/CartOrderSummary";
 import SectionTitle from "@/components/common/SectionTitle";
 import { EASE, staggerContainer, viewportOnce } from "@/lib/animations";
+import { CartLineItem } from "@/components/cart/CartLineItem";
+import { CartOrderSummary } from "@/components/cart/CartOrderSummary";
 
 export default function CartPage() {
   const isEmpty = cartItems.length === 0;
