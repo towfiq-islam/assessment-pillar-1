@@ -1,18 +1,10 @@
 "use client";
 import type { ReactNode } from "react";
-import { motion } from "framer-motion";
 import { FiMail, FiMapPin, FiPhone, FiUser } from "react-icons/fi";
-import { EASE, fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
 
 export function ShippingForm() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={viewportOnce}
-      transition={{ duration: 0.5, ease: EASE }}
-      className="rounded-xl border border-gray-200 bg-white p-4 md:p-6 shadow-sm"
-    >
+    <div className="animate-fade-up rounded-xl border border-gray-200 bg-white p-4 md:p-6 shadow-sm">
       {/* Header */}
       <div className="mb-6">
         <h2 className="text-lg font-semibold text-gray-900">
@@ -24,42 +16,45 @@ export function ShippingForm() {
         </p>
       </div>
 
-      <motion.div
-        initial="hidden"
-        whileInView="show"
-        viewport={viewportOnce}
-        variants={staggerContainer(0.08, 0.1)}
-        className="space-y-5"
-      >
+      <div className="space-y-5">
         <div className="grid grid-cols-1 gap-3 md:gap-5 sm:grid-cols-2">
-          <motion.div variants={fadeUp}>
+          <div className="animate-fade-up">
             <Field
               label="Full name"
               icon={<FiUser />}
               placeholder="Jenny Wilson"
             />
-          </motion.div>
+          </div>
 
-          <motion.div variants={fadeUp}>
+          <div
+            className="animate-fade-up"
+            style={{ animationDelay: "0.08s" }}
+          >
             <Field
               label="Phone number"
               icon={<FiPhone />}
               placeholder="+1 (555) 000-0000"
               type="tel"
             />
-          </motion.div>
+          </div>
         </div>
 
-        <motion.div variants={fadeUp}>
+        <div
+          className="animate-fade-up"
+          style={{ animationDelay: "0.16s" }}
+        >
           <Field
             label="Email address"
             icon={<FiMail />}
             placeholder="jenny@example.com"
             type="email"
           />
-        </motion.div>
+        </div>
 
-        <motion.label variants={fadeUp} className="block">
+        <label
+          className="animate-fade-up block"
+          style={{ animationDelay: "0.24s" }}
+        >
           <span className="mb-2 block text-sm font-medium text-gray-700">
             Address
           </span>
@@ -75,9 +70,12 @@ export function ShippingForm() {
               rows={4}
             ></textarea>
           </div>
-        </motion.label>
+        </label>
 
-        <motion.div variants={fadeUp} className="pt-2">
+        <div
+          className="animate-fade-up pt-2"
+          style={{ animationDelay: "0.32s" }}
+        >
           <span className="mb-3 block text-sm font-medium text-gray-700">
             Shipping method
           </span>
@@ -96,9 +94,9 @@ export function ShippingForm() {
               price="$49"
             />
           </div>
-        </motion.div>
-      </motion.div>
-    </motion.div>
+        </div>
+      </div>
+    </div>
   );
 }
 

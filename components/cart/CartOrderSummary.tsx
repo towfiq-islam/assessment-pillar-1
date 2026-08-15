@@ -1,11 +1,7 @@
 "use client";
 import { CartItem } from "@/types/cart";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { FiLock, FiTag } from "react-icons/fi";
-import { EASE } from "@/lib/animations";
-
-const MotionLink = motion(Link);
 
 interface CartOrderSummaryProps {
   items: CartItem[];
@@ -30,13 +26,7 @@ export function CartOrderSummary({ items }: CartOrderSummaryProps) {
   const total = subtotal + SHIPPING + tax;
 
   return (
-    <motion.aside
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.5, ease: EASE }}
-      className="rounded-xl border border-gray-200 bg-white p-4 md:p-5 shadow-sm"
-    >
+    <aside className="animate-fade-up rounded-xl border border-gray-200 bg-white p-4 md:p-5 shadow-sm">
       {/* Header */}
       <h2 className="text-xl font-semibold text-gray-900">Order Summary</h2>
 
@@ -76,13 +66,12 @@ export function CartOrderSummary({ items }: CartOrderSummaryProps) {
           className="w-full bg-transparent text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none"
         />
 
-        <motion.button
+        <button
           type="button"
-          whileTap={{ scale: 0.92 }}
-          className="shrink-0 text-sm font-semibold text-primary-orange transition-colors hover:text-primary-orange cursor-pointer"
+          className="shrink-0 text-sm font-semibold text-primary-orange transition-transform duration-200 hover:text-primary-orange active:scale-95 cursor-pointer"
         >
           Apply
-        </motion.button>
+        </button>
       </div>
 
       {/* Total */}
@@ -95,20 +84,17 @@ export function CartOrderSummary({ items }: CartOrderSummaryProps) {
       </div>
 
       {/* Checkout */}
-      <MotionLink
+      <Link
         href="/checkout"
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        transition={{ type: "spring", stiffness: 400, damping: 25 }}
-        className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-orange-500 py-2.5 font-semibold text-white transition-colors duration-200 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/20"
+        className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-orange-500 py-2.5 font-semibold text-white transition-[transform,background-color,box-shadow] duration-200 hover:scale-[1.02] hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/20 active:scale-[0.98]"
       >
         <FiLock className="h-4 w-4" />
         Checkout
-      </MotionLink>
+      </Link>
 
       <p className="mt-4 text-center text-xs text-gray-400">
         Taxes and shipping calculated at checkout
       </p>
-    </motion.aside>
+    </aside>
   );
 }

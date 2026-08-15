@@ -1,10 +1,8 @@
 "use client";
 import { cartItems } from "@/components/data/cart";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { FiShoppingBag } from "react-icons/fi";
 import SectionTitle from "@/components/common/SectionTitle";
-import { EASE, staggerContainer, viewportOnce } from "@/lib/animations";
 import { CartLineItem } from "@/components/cart/CartLineItem";
 import { CartOrderSummary } from "@/components/cart/CartOrderSummary";
 
@@ -14,42 +12,20 @@ export default function CartPage() {
   return (
     <div className="container pt-7 md:pt-10 xl:pt-12 pb-10 md:pb-16 xl:pb-20">
       <div className="max-w-5xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-          variants={staggerContainer(0.1)}
-          className="mb-5 md:mb-7"
-        >
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              show: {
-                opacity: 1,
-                y: 0,
-                transition: { duration: 0.5, ease: EASE },
-              },
-            }}
-          >
+        <div className="mb-5 md:mb-7">
+          <div className="animate-fade-up">
             <SectionTitle>
               Your <span className="text-orange-500">Cart</span>
             </SectionTitle>
-          </motion.div>
+          </div>
 
-          <motion.p
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              show: {
-                opacity: 1,
-                y: 0,
-                transition: { duration: 0.5, ease: EASE },
-              },
-            }}
-            className="mt-1 xl:mt-2 text-[15px] text-gray-500"
+          <p
+            className="animate-fade-up mt-1 xl:mt-2 text-[15px] text-gray-500"
+            style={{ animationDelay: "0.1s" }}
           >
             Review your items before checkout.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         {isEmpty ? (
           <EmptyCart />
@@ -61,7 +37,7 @@ export default function CartPage() {
               ))}
             </div>
 
-            {/* Summary */}
+            {/* Order Summary */}
             <div className="lg:col-span-1">
               <CartOrderSummary items={cartItems} />
             </div>
@@ -74,13 +50,7 @@ export default function CartPage() {
 
 function EmptyCart() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={viewportOnce}
-      transition={{ duration: 0.5, ease: EASE }}
-      className="flex flex-col items-center gap-4 rounded-2xl border border-gray-200 bg-white py-24 text-center shadow-sm"
-    >
+    <div className="animate-fade-up flex flex-col items-center gap-4 rounded-2xl border border-gray-200 bg-white py-24 text-center shadow-sm">
       <div className="flex h-16 w-16 items-center justify-center rounded-full bg-orange-50">
         <FiShoppingBag className="h-8 w-8 text-orange-500" />
       </div>
@@ -101,6 +71,6 @@ function EmptyCart() {
       >
         Browse products
       </Link>
-    </motion.div>
+    </div>
   );
 }

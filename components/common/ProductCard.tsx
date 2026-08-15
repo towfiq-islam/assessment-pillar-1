@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
 import { FiCheck, FiShoppingCart } from "react-icons/fi";
 import type { Product } from "@/types/product";
 
@@ -34,13 +33,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
   }
 
   return (
-    <motion.div
-      whileHover={{ y: -6 }}
-      whileTap={{ scale: 0.985 }}
-      transition={{ type: "spring", stiffness: 300, damping: 24 }}
-      className="group relative flex h-full flex-col overflow-hidden rounded-xl md:rounded-2xl border border-gray-200 bg-white shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-orange-200 hover:shadow-lg hover:shadow-gray-200/60"
-    >
-      {/* Image */}
+    <div className="group relative flex h-full flex-col overflow-hidden rounded-xl md:rounded-2xl border border-gray-200 bg-white shadow-sm duration-300 transition-all hover:-translate-y-1.5 hover:shadow-lg hover:shadow-gray-200/60 active:scale-[0.985]">
       <div className="relative h-[110px] md:h-[190px] xl:h-[220px] xl:w-full overflow-hidden">
         <Image
           src={product.image}
@@ -49,7 +42,6 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
           className="object-contain transition-transform duration-500 group-hover:scale-105"
         />
 
-        {/* Stock badge */}
         <span
           className={`absolute left-1.5 md:left-3 top-1.5 md:top-3 rounded-full px-2 md:px-3 py-0.5 md:py-1 text-[10px] md:text-xs font-medium shadow-sm ${
             inStock ? "bg-white text-gray-900" : "bg-gray-900/80 text-white"
@@ -91,30 +83,24 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
                 : "bg-gray-100 text-gray-400"
           }`}
         >
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.span
-              key={justAdded ? "added" : "add"}
-              initial={{ opacity: 0, y: 8, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -8, scale: 0.9 }}
-              transition={{ duration: 0.18, ease: "easeOut" }}
-              className="flex items-center justify-center gap-2"
-            >
-              {justAdded ? (
-                <>
-                  <FiCheck className="h-4 w-4" />
-                  Added to cart
-                </>
-              ) : (
-                <>
-                  <FiShoppingCart className="h-4 w-4" />
-                  {inStock ? "Add to cart" : "Out of stock"}
-                </>
-              )}
-            </motion.span>
-          </AnimatePresence>
+          <span
+            key={justAdded ? "added" : "add"}
+            className="animate-pop-in flex items-center justify-center gap-2"
+          >
+            {justAdded ? (
+              <>
+                <FiCheck className="h-4 w-4" />
+                Added to cart
+              </>
+            ) : (
+              <>
+                <FiShoppingCart className="h-4 w-4" />
+                {inStock ? "Add to cart" : "Out of stock"}
+              </>
+            )}
+          </span>
         </button>
       </div>
-    </motion.div>
+    </div>
   );
 }
