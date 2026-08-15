@@ -3,7 +3,7 @@ import { CartItem } from "@/types/cart";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FiLock, FiTag } from "react-icons/fi";
-import { EASE } from "@/components/common/animations";
+import { EASE } from "@/lib/animations";
 
 const MotionLink = motion(Link);
 

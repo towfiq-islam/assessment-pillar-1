@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { FiArrowUpRight } from "react-icons/fi";
 import type { CustomerOrder } from "@/types/customer";
-import { OrderStatusBadge } from "./OrderStatusBadge";
 
 interface RecentOrdersProps {
   orders: CustomerOrder[];
@@ -22,8 +21,8 @@ export function RecentOrders({
   showViewAll = true,
 }: RecentOrdersProps) {
   return (
-    <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-7">
-      <div className="mb-5 flex items-center justify-between">
+    <div className="rounded-xl md:rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:p-6">
+      <div className="mb-2 md:mb-5 flex items-center justify-between">
         <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
 
         {showViewAll && (
@@ -36,12 +35,11 @@ export function RecentOrders({
         )}
       </div>
 
-      {/* Desktop */}
+      {/* Desktop header row */}
       <div className="hidden grid-cols-[1fr_1fr_0.7fr_1fr_auto] gap-4 border-b border-gray-200 pb-3 text-xs uppercase tracking-wide text-gray-400 sm:grid">
         <span>Order</span>
         <span>Date</span>
         <span>Items</span>
-        <span>Status</span>
         <span className="text-right">Total</span>
       </div>
 
@@ -49,25 +47,48 @@ export function RecentOrders({
         {orders.map(order => (
           <li
             key={order.id}
-            className="grid grid-cols-2 items-center gap-3 border-b border-gray-100 py-4 last:border-b-0 sm:grid-cols-[1fr_1fr_0.7fr_1fr_auto] sm:gap-4"
+            className="border-b border-gray-100 py-3 md:py-4 last:border-b-0 sm:grid sm:grid-cols-[1fr_1fr_0.7fr_1fr_auto] sm:items-center sm:gap-4"
           >
-            <span className="font-medium text-gray-900">{order.id}</span>
+            {/* Mobile layout: stacked card */}
+            <div className="flex items-start justify-between sm:hidden">
+              <div>
+                <p className="font-medium text-gray-900">{order.id}</p>
+                <p className="mt-0.5 text-sm text-gray-500">{order.date}</p>
+              </div>
 
-            <span className="text-sm text-gray-500">{order.date}</span>
+              <div className="text-right">
+                <p className="font-semibold text-gray-900">
+                  {currency.format(order.total)}
+                </p>
+                <p className="mt-0.5 text-sm text-gray-500">
+                  {order.itemsCount} {order.itemsCount === 1 ? "item" : "items"}
+                </p>
+              </div>
+            </div>
 
-            <span className="text-sm text-gray-500">
+            {/* Desktop layout: grid row */}
+            <span className="hidden font-medium text-gray-900 sm:inline">
+              {order.id}
+            </span>
+
+            <span className="hidden text-sm text-gray-500 sm:inline">
+              {order.date}
+            </span>
+
+            <span className="hidden text-sm text-gray-500 sm:inline">
               {order.itemsCount} {order.itemsCount === 1 ? "item" : "items"}
             </span>
 
-            <span>
-              <OrderStatusBadge status={order.status} />
-            </span>
-
-            <span className="flex items-center justify-end gap-2 text-right font-semibold text-gray-900">
+            <span className="hidden text-right font-semibold text-gray-900 sm:inline">
               {currency.format(order.total)}
-
-              <FiArrowUpRight className="hidden h-3.5 w-3.5 text-gray-400 sm:block" />
             </span>
+
+            <Link
+              href={`/dashboard/orders/${order.id}`}
+              className="hidden items-center justify-center rounded-full p-2 text-gray-400 transition-colors hover:bg-gray-50 hover:text-primary-orange sm:flex"
+            >
+              <FiArrowUpRight className="h-4 w-4" />
+            </Link>
           </li>
         ))}
       </ul>
