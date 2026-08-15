@@ -1,6 +1,5 @@
 "use client";
 import type { ReactNode } from "react";
-import { motion } from "framer-motion";
 import { FiCheckCircle, FiClock, FiTruck, FiXCircle } from "react-icons/fi";
 import type { OrderStatus } from "@/types/customer";
 
@@ -29,15 +28,11 @@ const STATUS_STYLES: Record<
 export function OrderStatusBadge({ status }: { status: OrderStatus }) {
   const { className, icon } = STATUS_STYLES[status];
   return (
-    <motion.span
-      initial={{ scale: 0.5, opacity: 0 }}
-      whileInView={{ scale: 1, opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ type: "spring", stiffness: 400, damping: 24 }}
+    <span
       className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium ${className}`}
     >
       {icon}
       {status}
-    </motion.span>
+    </span>
   );
 }
