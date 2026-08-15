@@ -3,14 +3,10 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
 import logo from "@/assets/logo.png";
 import { FiShoppingBag, FiUser, FiMenu, FiX, FiLogOut } from "react-icons/fi";
-import { EASE, staggerContainer } from "@/lib/animations";
 import { sidebarLinks } from "@/components/dashboard/dashboardLinks";
 import type { CustomerProfile } from "@/types/customer";
-
-const MotionLink = motion(Link);
 
 type NavLink = {
   label: string;
@@ -25,15 +21,6 @@ const NavLinks = [
   { label: "Project", path: "" },
   { label: "Contact", path: "" },
 ];
-
-const menuItemVariants = {
-  hidden: { opacity: 0, y: 10 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.25, ease: EASE },
-  },
-};
 
 function NavItem({ link, isActive }: { link: NavLink; isActive: boolean }) {
   return (
@@ -100,30 +87,6 @@ export default function Navbar({ customer }: NavbarProps) {
     };
   }, [isDrawerOpen]);
 
-  useEffect(() => {
-    if (!isMenuOpen && !isDrawerOpen) return;
-
-    function handlePointerDown(event: MouseEvent | TouchEvent) {
-      if (navRef.current && !navRef.current.contains(event.target as Node)) {
-        closeMenus();
-      }
-    }
-
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") closeMenus();
-    }
-
-    document.addEventListener("mousedown", handlePointerDown);
-    document.addEventListener("touchstart", handlePointerDown);
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("mousedown", handlePointerDown);
-      document.removeEventListener("touchstart", handlePointerDown);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isMenuOpen, isDrawerOpen]);
-
   return (
     <nav ref={navRef} className="sticky top-3 xl:top-3.5 z-50">
       {/*  Desktop */}
@@ -161,16 +124,13 @@ export default function Navbar({ customer }: NavbarProps) {
             <span>Login</span>
           </Link>
 
-          <MotionLink
+          <Link
             href="/cart"
             aria-label="Shopping cart"
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.92 }}
-            transition={{ type: "spring", stiffness: 400, damping: 22 }}
-            className="relative flex size-9.5 xl:size-10 items-center justify-center rounded-full bg-primary-orange text-white shadow-[0_4px_20px_rgba(255,107,53,0.25)] transition-shadow duration-300 hover:shadow-[0_6px_25px_rgba(255,107,53,0.4)]"
+            className="relative flex size-9.5 xl:size-10 items-center justify-center rounded-full bg-primary-orange text-white shadow-[0_4px_20px_rgba(255,107,53,0.25)] transition-[transform,box-shadow] duration-300 hover:scale-105 hover:shadow-[0_6px_25px_rgba(255,107,53,0.4)] active:scale-95"
           >
             <FiShoppingBag size={18} />
-          </MotionLink>
+          </Link>
         </div>
       </div>
 
@@ -198,167 +158,139 @@ export default function Navbar({ customer }: NavbarProps) {
             }}
             className="relative flex size-9 items-center justify-center rounded-full text-white/80 transition-colors duration-200 hover:bg-[#333] hover:text-white cursor-pointer"
           >
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.span
-                key={isMenuOpen || isDrawerOpen ? "close" : "menu"}
-                initial={{ rotate: -90, opacity: 0, scale: 0.7 }}
-                animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                exit={{ rotate: 90, opacity: 0, scale: 0.7 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-                className="flex items-center justify-center"
-              >
-                {isMenuOpen || isDrawerOpen ? (
-                  <FiX size={24} />
-                ) : (
-                  <FiMenu size={24} />
-                )}
-              </motion.span>
-            </AnimatePresence>
+            <span
+              key={isMenuOpen || isDrawerOpen ? "close" : "menu"}
+              className="animate-icon-swap flex items-center justify-center"
+            >
+              {isMenuOpen || isDrawerOpen ? (
+                <FiX size={24} />
+              ) : (
+                <FiMenu size={24} />
+              )}
+            </span>
           </button>
         </div>
 
         {!isDashboard && (
           <div className="absolute inset-x-0 top-full z-40 mt-2">
-            <AnimatePresence>
-              {isMenuOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -8, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -8, scale: 0.98 }}
-                  transition={{ duration: 0.25, ease: EASE }}
-                  style={{ transformOrigin: "top" }}
-                >
-                  <motion.div
-                    initial="hidden"
-                    animate="show"
-                    variants={staggerContainer(0.05, 0.05)}
-                    className="flex flex-col rounded-3xl bg-secondary-black py-2 text-white shadow-2xl shadow-black/40"
-                  >
-                    {NavLinks.map(link => (
-                      <motion.div key={link.path} variants={menuItemVariants}>
-                        <MobileNavItem
-                          link={link}
-                          isActive={pathname === link.path}
-                          onNavigate={closeMenus}
-                        />
-                      </motion.div>
-                    ))}
-
-                    <motion.div
-                      variants={menuItemVariants}
-                      className="mt-2 flex items-center justify-center gap-3 border-t border-white/10 px-4 pt-3"
+            {isMenuOpen && (
+              <div className="animate-menu-in">
+                <div className="flex flex-col rounded-3xl bg-secondary-black py-2 text-white shadow-2xl shadow-black/40">
+                  {NavLinks.map((link, i) => (
+                    <div
+                      key={link.path}
+                      className="animate-fade-up"
+                      style={{ animationDelay: `${0.05 + i * 0.05}s` }}
                     >
-                      <Link
-                        href="/login"
-                        onClick={closeMenus}
-                        className="flex flex-1 items-center justify-center gap-2 rounded-full border border-white/10 px-4 py-2.5 text-sm font-medium text-white/80 transition-all duration-300 hover:border-white/20 hover:text-white"
-                      >
-                        <FiUser size={17} />
-                        <span>Login</span>
-                      </Link>
+                      <MobileNavItem
+                        link={link}
+                        isActive={pathname === link.path}
+                        onNavigate={closeMenus}
+                      />
+                    </div>
+                  ))}
 
-                      <MotionLink
-                        href="/cart"
-                        onClick={closeMenus}
-                        aria-label="Shopping cart"
-                        whileTap={{ scale: 0.92 }}
-                        className="relative flex size-10 shrink-0 items-center justify-center rounded-full bg-primary-orange text-white shadow-[0_4px_20px_rgba(255,107,53,0.25)]"
-                      >
-                        <FiShoppingBag size={18} />
-                      </MotionLink>
-                    </motion.div>
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  <div
+                    className="animate-fade-up mt-2 flex items-center justify-center gap-3 border-t border-white/10 px-4 pt-3"
+                    style={{
+                      animationDelay: `${0.05 + NavLinks.length * 0.05}s`,
+                    }}
+                  >
+                    <Link
+                      href="/login"
+                      onClick={closeMenus}
+                      className="flex flex-1 items-center justify-center gap-2 rounded-full border border-white/10 px-4 py-2.5 text-sm font-medium text-white/80 transition-all duration-300 hover:border-white/20 hover:text-white"
+                    >
+                      <FiUser size={17} />
+                      <span>Login</span>
+                    </Link>
+
+                    <Link
+                      href="/cart"
+                      onClick={closeMenus}
+                      aria-label="Shopping cart"
+                      className="relative flex size-10 shrink-0 items-center justify-center rounded-full bg-primary-orange text-white shadow-[0_4px_20px_rgba(255,107,53,0.25)] transition-transform duration-200 active:scale-90"
+                    >
+                      <FiShoppingBag size={18} />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
 
-        {isDashboard && (
-          <AnimatePresence>
-            {isDrawerOpen && (
-              <motion.div
-                className="fixed inset-0 z-50"
-                role="dialog"
-                aria-modal="true"
-                aria-label="Dashboard menu"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.25, ease: EASE }}
-              >
-                {/* Backdrop */}
-                <div
-                  className="absolute inset-0 bg-black/40 backdrop-blur-xs"
+        {isDashboard && isDrawerOpen && (
+          <div
+            className="fixed inset-0 z-50"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Dashboard menu"
+          >
+            {/* Backdrop */}
+            <div
+              className="animate-backdrop-in absolute inset-0 bg-black/40 backdrop-blur-xs"
+              onClick={closeMenus}
+            />
+
+            <div className="animate-drawer-in absolute inset-y-0 left-0 flex w-64 md:w-68 max-w-[85vw] flex-col bg-white shadow-2xl">
+              <div className="flex items-center justify-between border-b border-gray-200 p-5">
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold text-gray-900">
+                    {customer?.name ?? "My account"}
+                  </p>
+                  <p className="truncate text-xs text-gray-500">
+                    {customer?.email}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
                   onClick={closeMenus}
-                />
-
-                <motion.div
-                  className="absolute inset-y-0 left-0 flex w-64 md:w-68 max-w-[85vw] flex-col bg-white shadow-2xl"
-                  initial={{ x: "-100%" }}
-                  animate={{ x: 0 }}
-                  exit={{ x: "-100%" }}
-                  transition={{ type: "spring", stiffness: 320, damping: 32 }}
+                  aria-label="Close menu"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-900 cursor-pointer"
                 >
-                  <div className="flex items-center justify-between border-b border-gray-200 p-5">
-                    <div className="min-w-0">
-                      <p className="truncate text-sm font-semibold text-gray-900">
-                        {customer?.name ?? "My account"}
-                      </p>
-                      <p className="truncate text-xs text-gray-500">
-                        {customer?.email}
-                      </p>
-                    </div>
+                  <FiX className="h-5 w-5" />
+                </button>
+              </div>
 
-                    <button
-                      type="button"
-                      onClick={closeMenus}
-                      aria-label="Close menu"
-                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-900 cursor-pointer"
-                    >
-                      <FiX className="h-5 w-5" />
-                    </button>
-                  </div>
+              <div className="flex-1 overflow-y-auto p-5">
+                <nav>
+                  <ul className="flex flex-col gap-1.5">
+                    {sidebarLinks?.map(link => {
+                      const isActive = pathname === link.path;
 
-                  <div className="flex-1 overflow-y-auto p-5">
-                    <nav>
-                      <ul className="flex flex-col gap-1.5">
-                        {sidebarLinks?.map(link => {
-                          const isActive = pathname === link.path;
+                      return (
+                        <li key={link.path}>
+                          <Link
+                            href={link.path}
+                            onClick={closeMenus}
+                            aria-current={isActive ? "page" : undefined}
+                            className={`flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium transition-colors duration-200 ${
+                              isActive
+                                ? "bg-primary-orange text-black"
+                                : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                            }`}
+                          >
+                            {link.icon}
+                            {link.label}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </nav>
 
-                          return (
-                            <li key={link.path}>
-                              <Link
-                                href={link.path}
-                                onClick={closeMenus}
-                                aria-current={isActive ? "page" : undefined}
-                                className={`flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium transition-colors duration-200 ${
-                                  isActive
-                                    ? "bg-primary-orange text-black"
-                                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-                                }`}
-                              >
-                                {link.icon}
-                                {link.label}
-                              </Link>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </nav>
-
-                    <button
-                      type="button"
-                      className="mt-3 flex items-center gap-3 rounded-full px-4 py-3 text-[15px] font-semibold cursor-pointer transition-colors duration-200 text-red-500"
-                    >
-                      <FiLogOut className="h-4 w-4" />
-                      Log out
-                    </button>
-                  </div>
-                </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                <button
+                  type="button"
+                  className="mt-3 flex items-center gap-3 rounded-full px-4 py-3 text-[15px] font-semibold cursor-pointer transition-colors duration-200 text-red-500"
+                >
+                  <FiLogOut className="h-4 w-4" />
+                  Log out
+                </button>
+              </div>
+            </div>
+          </div>
         )}
       </div>
     </nav>
