@@ -22,15 +22,15 @@ type SocialLink = {
 
 const quickLinks: FooterLink[] = [
   { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
-  { label: "Resume", path: "/resume" },
-  { label: "Project", path: "/project" },
+  { label: "About", path: "" },
+  { label: "Resume", path: "" },
+  { label: "Project", path: "" },
 ];
 
 const serviceLinks: FooterLink[] = [
-  { label: "UI/UX Design", path: "/service#ui-ux" },
-  { label: "Web Design", path: "/service#web" },
-  { label: "Landing Page", path: "/service#landing" },
+  { label: "UI/UX Design", path: "" },
+  { label: "Web Design", path: "" },
+  { label: "Landing Page", path: "" },
 ];
 
 const socialLinks: SocialLink[] = [
@@ -85,10 +85,10 @@ export default function Footer() {
         >
           <p>© {new Date().getFullYear()}. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="hover:text-white">
+            <Link href="" className="hover:text-white">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:text-white">
+            <Link href="" className="hover:text-white">
               Terms of Service
             </Link>
           </div>
