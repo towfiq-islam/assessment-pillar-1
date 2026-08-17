@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -69,8 +69,6 @@ export default function Navbar({ customer }: NavbarProps) {
   const isDashboard = pathname.startsWith("/dashboard");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const navRef = useRef<HTMLElement>(null);
-
   const closeMenus = () => {
     setIsMenuOpen(false);
     setIsDrawerOpen(false);
@@ -88,7 +86,7 @@ export default function Navbar({ customer }: NavbarProps) {
   }, [isDrawerOpen]);
 
   return (
-    <nav ref={navRef} className="sticky top-3 xl:top-3.5 z-50">
+    <nav className="sticky top-3 xl:top-3.5 z-50">
       {/*  Desktop */}
       <div className="nav-fade hidden lg:max-w-[94%] xl:max-w-7xl lg:mx-auto lg:p-2.5 lg:flex items-center justify-between rounded-full bg-secondary-black text-white gap-5 xl:gap-20">
         <ul className="w-full flex justify-between items-center flex-1">

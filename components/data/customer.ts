@@ -2,7 +2,6 @@ import type {
   Address,
   CustomerOrder,
   CustomerProfile,
-  WishlistItem,
 } from "@/types/customer";
 
 export const customer: CustomerProfile = {
@@ -68,19 +67,3 @@ export const customerAddresses: Address[] = [
   },
 ];
 
-export const wishlistItems: WishlistItem[] = [
-  {
-    id: 2,
-    name: "Logitech MX Master 3",
-    category: "Accessories",
-    price: 99,
-    image: "/assets/images/logitech-mx-master.jpg",
-  },
-  {
-    id: 6,
-    name: "ASUS ROG Zephyrus G14",
-    category: "Laptops",
-    price: 1749,
-    image: "/assets/images/asus-rog-zephyrus.jpg",
-  },
-];
