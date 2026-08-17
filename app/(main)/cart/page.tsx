@@ -15,7 +15,7 @@ export default function CartPage() {
         <div className="mb-5 md:mb-7">
           <div className="animate-fade-up">
             <SectionTitle>
-              Your <span className="text-orange-500">Cart</span>
+              Your <span className="text-primary-orange">Cart</span>
             </SectionTitle>
           </div>
 
@@ -28,7 +28,28 @@ export default function CartPage() {
         </div>
 
         {isEmpty ? (
-          <EmptyCart />
+          <div className="animate-fade-up flex flex-col items-center gap-4 rounded-2xl border border-gray-200 bg-white py-24 text-center shadow-sm">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-orange-50">
+              <FiShoppingBag className="h-8 w-8 text-orange-500" />
+            </div>
+
+            <div>
+              <p className="text-lg font-semibold text-gray-900">
+                Your cart is empty
+              </p>
+
+              <p className="mt-1 text-sm text-gray-500">
+                Looks like you haven&apos;t added anything yet.
+              </p>
+            </div>
+
+            <Link
+              href="/"
+              className="mt-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/20"
+            >
+              Browse products
+            </Link>
+          </div>
         ) : (
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 items-start">
             <div className="rounded-xl border border-gray-200 bg-white shadow-sm lg:col-span-2 overflow-hidden">
@@ -44,33 +65,6 @@ export default function CartPage() {
           </div>
         )}
       </div>
-    </div>
-  );
-}
-
-function EmptyCart() {
-  return (
-    <div className="animate-fade-up flex flex-col items-center gap-4 rounded-2xl border border-gray-200 bg-white py-24 text-center shadow-sm">
-      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-orange-50">
-        <FiShoppingBag className="h-8 w-8 text-orange-500" />
-      </div>
-
-      <div>
-        <p className="text-lg font-semibold text-gray-900">
-          Your cart is empty
-        </p>
-
-        <p className="mt-1 text-sm text-gray-500">
-          Looks like you haven&apos;t added anything yet.
-        </p>
-      </div>
-
-      <Link
-        href="/"
-        className="mt-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/20"
-      >
-        Browse products
-      </Link>
     </div>
   );
 }
